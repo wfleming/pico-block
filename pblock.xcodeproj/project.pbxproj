@@ -168,15 +168,12 @@
 			isa = PBXGroup;
 			children = (
 				BE82A2E11B504CF4007A91AA /* RuleParser */,
-				BE43E5A51B4F3BA000C522FF /* pblock.entitlements */,
 				BE43E5631B4F25FC00C522FF /* AppDelegate.swift */,
 				BE43E5651B4F25FC00C522FF /* FirstViewController.swift */,
 				BE43E5671B4F25FC00C522FF /* SecondViewController.swift */,
-				BE43E5691B4F25FC00C522FF /* Main.storyboard */,
-				BE43E56C1B4F25FC00C522FF /* Assets.xcassets */,
-				BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */,
-				BE43E5711B4F25FC00C522FF /* Info.plist */,
+				BE82A2EC1B5055EC007A91AA /* Supporting Files */,
 				BE82A2CF1B500F6D007A91AA /* Frameworks */,
+				BE43E5711B4F25FC00C522FF /* Info.plist */,
 			);
 			path = pblock;
 			sourceTree = "<group>";
@@ -250,6 +247,17 @@
 				BE82A2E91B5052DA007A91AA /* DebugLog.swift */,
 			);
 			path = pblockLib;
+			sourceTree = "<group>";
+		};
+		BE82A2EC1B5055EC007A91AA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE43E5A51B4F3BA000C522FF /* pblock.entitlements */,
+				BE43E5691B4F25FC00C522FF /* Main.storyboard */,
+				BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */,
+				BE43E56C1B4F25FC00C522FF /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,6 +528,7 @@
 				BE43E56A1B4F25FC00C522FF /* Base */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */ = {
@@ -528,6 +537,7 @@
 				BE43E56F1B4F25FC00C522FF /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
