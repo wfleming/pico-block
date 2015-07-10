@@ -230,6 +230,7 @@
 			buildPhases = (
 				BE43E55C1B4F25FB00C522FF /* Sources */,
 				BE43E55D1B4F25FB00C522FF /* Frameworks */,
+				BE82A2DA1B5014AD007A91AA /* ShellScript */,
 				BE43E55E1B4F25FB00C522FF /* Resources */,
 				BE43E5A41B4F262100C522FF /* Embed App Extensions */,
 			);
@@ -388,6 +389,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BE82A2DA1B5014AD007A91AA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/scripts/bump_build_number.sh \"${BUILT_PRODUCTS_DIR}/pblock.app/Info.plist\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE43E55C1B4F25FB00C522FF /* Sources */ = {
