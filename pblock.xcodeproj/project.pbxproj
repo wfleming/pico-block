@@ -17,6 +17,12 @@
 		BE43E5861B4F25FC00C522FF /* pblockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5851B4F25FC00C522FF /* pblockUITests.swift */; };
 		BE43E59C1B4F262100C522FF /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E59B1B4F262100C522FF /* ActionRequestHandler.swift */; };
 		BE43E5A01B4F262100C522FF /* pblock-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE43E5971B4F262100C522FF /* pblock-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2CD1B500F62007A91AA /* CoreData.framework */; };
+		BE82A2D11B500F91007A91AA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D01B500F91007A91AA /* Alamofire.framework */; };
+		BE82A2D51B5011DA007A91AA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D31B5011DA007A91AA /* Nimble.framework */; };
+		BE82A2D61B5011DA007A91AA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D41B5011DA007A91AA /* Quick.framework */; };
+		BE82A2D81B501211007A91AA /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE82A2D31B5011DA007A91AA /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE82A2D91B501211007A91AA /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE82A2D41B5011DA007A91AA /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +61,17 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE82A2D71B5011F7007A91AA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE82A2D81B501211007A91AA /* Nimble.framework in CopyFiles */,
+				BE82A2D91B501211007A91AA /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +94,10 @@
 		BE43E59D1B4F262100C522FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE43E5A51B4F3BA000C522FF /* pblock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = pblock.entitlements; sourceTree = "<group>"; };
 		BE43E5A61B4F3BB400C522FF /* pblock-extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "pblock-extension.entitlements"; sourceTree = "<group>"; };
+		BE82A2CD1B500F62007A91AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BE82A2D01B500F91007A91AA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
+		BE82A2D31B5011DA007A91AA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		BE82A2D41B5011DA007A91AA /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */,
+				BE82A2D11B500F91007A91AA /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE82A2D51B5011DA007A91AA /* Nimble.framework in Frameworks */,
+				BE82A2D61B5011DA007A91AA /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +169,7 @@
 				BE43E56C1B4F25FC00C522FF /* Assets.xcassets */,
 				BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */,
 				BE43E5711B4F25FC00C522FF /* Info.plist */,
+				BE82A2CF1B500F6D007A91AA /* Frameworks */,
 			);
 			path = pblock;
 			sourceTree = "<group>";
@@ -153,6 +179,7 @@
 			children = (
 				BE43E57A1B4F25FC00C522FF /* pblockTests.swift */,
 				BE43E57C1B4F25FC00C522FF /* Info.plist */,
+				BE82A2D21B5011C3007A91AA /* Frameworks */,
 			);
 			path = pblockTests;
 			sourceTree = "<group>";
@@ -174,6 +201,24 @@
 				BE43E59D1B4F262100C522FF /* Info.plist */,
 			);
 			path = "pblock-extension";
+			sourceTree = "<group>";
+		};
+		BE82A2CF1B500F6D007A91AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE82A2D01B500F91007A91AA /* Alamofire.framework */,
+				BE82A2CD1B500F62007A91AA /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE82A2D21B5011C3007A91AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE82A2D31B5011DA007A91AA /* Nimble.framework */,
+				BE82A2D41B5011DA007A91AA /* Quick.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +250,7 @@
 				BE43E5721B4F25FC00C522FF /* Sources */,
 				BE43E5731B4F25FC00C522FF /* Frameworks */,
 				BE43E5741B4F25FC00C522FF /* Resources */,
+				BE82A2D71B5011F7007A91AA /* CopyFiles */,
 			);
 			buildRules = (
 			);
