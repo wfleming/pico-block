@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    logAppOpen()
   }
 
   func applicationWillTerminate(application: UIApplication) {
@@ -42,5 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
 
+  // DEBUG: log app opens to compare with extension requests
+  func logAppOpen() {
+    #if DEBUG
+      let fm = NSFileManager.defaultManager()
+      let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
+      let logURL = dirURL.URLByAppendingPathComponent("events.log")
+      let fh = try! NSFileHandle(forWritingToURL: logURL)
+      fh.seekToEndOfFile()
+      let logLine = "$\(NSDate().description) app became active\n"
+      fh.writeData(logLine.dataUsingEncoding(NSUTF8StringEncoding)!)
+      fh.closeFile()
+    #endif
+  }
 }
 

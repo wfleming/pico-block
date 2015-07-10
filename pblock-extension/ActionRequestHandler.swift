@@ -30,14 +30,16 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 
   // DEBUG: log when/how often the extension is refreshed
   func logExtensionRequest() {
-    let fm = NSFileManager.defaultManager()
-    let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
-    let logURL = dirURL.URLByAppendingPathComponent("events.log")
-    let fh = try! NSFileHandle(forWritingToURL: logURL)
-    fh.seekToEndOfFile()
-    let logLine = "$\(NSDate().description) extension request\n"
-    fh.writeData(logLine.dataUsingEncoding(NSUTF8StringEncoding)!)
-    fh.closeFile()
+    #if DEBUG
+      let fm = NSFileManager.defaultManager()
+      let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
+      let logURL = dirURL.URLByAppendingPathComponent("events.log")
+      let fh = try! NSFileHandle(forWritingToURL: logURL)
+      fh.seekToEndOfFile()
+      let logLine = "$\(NSDate().description) extension request\n"
+      fh.writeData(logLine.dataUsingEncoding(NSUTF8StringEncoding)!)
+      fh.closeFile()
+    #endif
   }
   
 }
