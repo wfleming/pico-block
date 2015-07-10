@@ -34,26 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
-    logAppOpen()
+    logToGroupLogFile("$\(NSDate().description) app became active")
   }
 
   func applicationWillTerminate(application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-  }
-
-
-  // DEBUG: log app opens to compare with extension requests
-  func logAppOpen() {
-    #if DEBUG
-      let fm = NSFileManager.defaultManager()
-      let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
-      let logURL = dirURL.URLByAppendingPathComponent("events.log")
-      let fh = try! NSFileHandle(forWritingToURL: logURL)
-      fh.seekToEndOfFile()
-      let logLine = "$\(NSDate().description) app became active\n"
-      fh.writeData(logLine.dataUsingEncoding(NSUTF8StringEncoding)!)
-      fh.closeFile()
-    #endif
   }
 }
 

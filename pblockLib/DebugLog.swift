@@ -1,5 +1,5 @@
 //
-//  debugLogging.swift
+//  GroupLog.swift
 //  pblock
 //
 //  Created by Will Fleming on 7/10/15.
@@ -25,10 +25,29 @@ Instead, adopt one of the protocols mentioned above.
 :param: function The name of the function, defaults to the function within which the call is made.
 :param: line     The line number, defaults to the line number within the file that the call is made.
 */
-func DLOG<T>(@autoclosure message: () -> T, _ file: String = __FILE__, _ function: String = __FUNCTION__, _ line: Int = __LINE__) {
+func dlog<T>(@autoclosure message: () -> T, _ file: String = __FILE__, _ function: String = __FUNCTION__, _ line: Int = __LINE__) {
   #if DEBUG
     let file = file.lastPathComponent.stringByDeletingPathExtension
 
     print("\(file).\(function)[\(line)]: \(message())\n")
+  #endif
+}
+
+/**
+Log a message to a file shared by the app group.
+*/
+func logToGroupLogFile(message: String) {
+  #if DEBUG
+    let fm = NSFileManager.defaultManager()
+    let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
+    let logURL = dirURL.URLByAppendingPathComponent("events.log")
+    do {
+      let fh = try NSFileHandle(forWritingToURL: logURL)
+      fh.seekToEndOfFile()
+      fh.writeData("$\(message)\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+      fh.closeFile()
+    } catch {
+      print("Error encountered trying to write to group log: $\(error)\n")
+    }
   #endif
 }
