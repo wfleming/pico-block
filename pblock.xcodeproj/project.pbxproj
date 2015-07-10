@@ -15,7 +15,6 @@
 		BE43E5701B4F25FC00C522FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */; };
 		BE43E57B1B4F25FC00C522FF /* pblockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E57A1B4F25FC00C522FF /* pblockTests.swift */; };
 		BE43E5861B4F25FC00C522FF /* pblockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5851B4F25FC00C522FF /* pblockUITests.swift */; };
-		BE43E59A1B4F262100C522FF /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = BE43E5991B4F262100C522FF /* blockerList.json */; };
 		BE43E59C1B4F262100C522FF /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E59B1B4F262100C522FF /* ActionRequestHandler.swift */; };
 		BE43E5A01B4F262100C522FF /* pblock-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE43E5971B4F262100C522FF /* pblock-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -74,7 +73,6 @@
 		BE43E5851B4F25FC00C522FF /* pblockUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pblockUITests.swift; sourceTree = "<group>"; };
 		BE43E5871B4F25FC00C522FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE43E5971B4F262100C522FF /* pblock-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "pblock-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE43E5991B4F262100C522FF /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		BE43E59B1B4F262100C522FF /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
 		BE43E59D1B4F262100C522FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE43E5A51B4F3BA000C522FF /* pblock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = pblock.entitlements; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				BE43E5A61B4F3BB400C522FF /* pblock-extension.entitlements */,
-				BE43E5991B4F262100C522FF /* blockerList.json */,
 				BE43E59B1B4F262100C522FF /* ActionRequestHandler.swift */,
 				BE43E59D1B4F262100C522FF /* Info.plist */,
 			);
@@ -341,7 +338,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE43E59A1B4F262100C522FF /* blockerList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
