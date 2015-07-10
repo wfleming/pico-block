@@ -1,11 +1,3 @@
-//
-//  RuleParserSpec.swift
-//  pblock
-//
-//  Created by Will Fleming on 7/10/15.
-//  Copyright © 2015 Will Fleming. All rights reserved.
-//
-
 import Quick
 import Nimble
 @testable import pblock

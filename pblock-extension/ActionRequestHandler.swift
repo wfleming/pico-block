@@ -12,7 +12,7 @@ import MobileCoreServices
 class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 
   func beginRequestWithExtensionContext(context: NSExtensionContext) {
-    logToGroupLogFile("$\(NSDate().description) extension request")
+    logToGroupLogFile("\(NSDate().description) extension request")
 
     let item = NSExtensionItem()
 

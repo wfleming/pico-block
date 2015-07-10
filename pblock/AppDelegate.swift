@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
+  lazy private(set) var coreDataMgr = {
+    return CoreDataManager()
+  }()
+  var managedObjectCtx : NSManagedObjectContext {
+    get {
+      return coreDataMgr.managedObjectContext!
+    }
+  }
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
@@ -34,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
-    logToGroupLogFile("$\(NSDate().description) app became active")
+    logToGroupLogFile("\(NSDate().description) app became active")
   }
 
   func applicationWillTerminate(application: UIApplication) {

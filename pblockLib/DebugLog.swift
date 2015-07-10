@@ -39,15 +39,19 @@ Log a message to a file shared by the app group.
 func logToGroupLogFile(message: String) {
   #if DEBUG
     let fm = NSFileManager.defaultManager()
-    let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
-    let logURL = dirURL.URLByAppendingPathComponent("events.log")
-    do {
-      let fh = try NSFileHandle(forWritingToURL: logURL)
-      fh.seekToEndOfFile()
-      fh.writeData("$\(message)\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-      fh.closeFile()
-    } catch {
-      print("Error encountered trying to write to group log: $\(error)\n")
+    let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")
+    if nil == dirURL {
+      print("Could not get group directory: cannot log message \"\(message)\"\n")
+    } else {
+      let logURL = dirURL!.URLByAppendingPathComponent("events.log")
+      do {
+        let fh = try NSFileHandle(forWritingToURL: logURL)
+        fh.seekToEndOfFile()
+        fh.writeData("$\(message)\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        fh.closeFile()
+      } catch {
+        print("Error encountered trying to write message \"\(message)\"to group log: \(error)\n")
+      }
     }
   #endif
 }

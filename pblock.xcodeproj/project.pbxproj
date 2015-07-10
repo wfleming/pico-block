@@ -26,6 +26,17 @@
 		BE82A2E71B504FE7007A91AA /* RuleParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2E61B504FE7007A91AA /* RuleParserSpec.swift */; };
 		BE82A2EA1B5052DA007A91AA /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2E91B5052DA007A91AA /* DebugLog.swift */; };
 		BE82A2EB1B5052DA007A91AA /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2E91B5052DA007A91AA /* DebugLog.swift */; };
+		BE82A2EF1B5057D1007A91AA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2ED1B5057D1007A91AA /* Model.xcdatamodeld */; };
+		BE82A2F01B5057D1007A91AA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2ED1B5057D1007A91AA /* Model.xcdatamodeld */; };
+		BE82A2FE1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2FA1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift */; };
+		BE82A2FF1B505B5E007A91AA /* RuleSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2FB1B505B5E007A91AA /* RuleSource.swift */; };
+		BE82A3001B505B5E007A91AA /* Rule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2FC1B505B5E007A91AA /* Rule+CoreDataProperties.swift */; };
+		BE82A3011B505B5E007A91AA /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A2FD1B505B5E007A91AA /* Rule.swift */; };
+		BE82A3041B506B8E007A91AA /* RuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A3031B506B8D007A91AA /* RuleSpec.swift */; };
+		BE82A3061B5073E7007A91AA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A3051B5073E7007A91AA /* CoreDataManager.swift */; };
+		BE82A3081B508093007A91AA /* NSManagedObject+pblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A3071B508093007A91AA /* NSManagedObject+pblock.swift */; };
+		BE82A30A1B508950007A91AA /* NSManagedObject+pblockSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A3091B508950007A91AA /* NSManagedObject+pblockSpec.swift */; };
+		BE82A30E1B5089DA007A91AA /* SharedSpecHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A30D1B5089DA007A91AA /* SharedSpecHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +114,16 @@
 		BE82A2E21B504D3B007A91AA /* RuleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleParser.swift; sourceTree = "<group>"; };
 		BE82A2E61B504FE7007A91AA /* RuleParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleParserSpec.swift; sourceTree = "<group>"; };
 		BE82A2E91B5052DA007A91AA /* DebugLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		BE82A2EE1B5057D1007A91AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		BE82A2FA1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RuleSource+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BE82A2FB1B505B5E007A91AA /* RuleSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSource.swift; sourceTree = "<group>"; };
+		BE82A2FC1B505B5E007A91AA /* Rule+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rule+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BE82A2FD1B505B5E007A91AA /* Rule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
+		BE82A3031B506B8D007A91AA /* RuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSpec.swift; sourceTree = "<group>"; };
+		BE82A3051B5073E7007A91AA /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		BE82A3071B508093007A91AA /* NSManagedObject+pblock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+pblock.swift"; sourceTree = "<group>"; };
+		BE82A3091B508950007A91AA /* NSManagedObject+pblockSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+pblockSpec.swift"; sourceTree = "<group>"; };
+		BE82A30D1B5089DA007A91AA /* SharedSpecHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedSpecHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +188,9 @@
 		BE43E5621B4F25FB00C522FF /* pblock */ = {
 			isa = PBXGroup;
 			children = (
+				BE82A2F11B505AEA007A91AA /* Models */,
 				BE82A2E11B504CF4007A91AA /* RuleParser */,
+				BE82A3051B5073E7007A91AA /* CoreDataManager.swift */,
 				BE43E5631B4F25FC00C522FF /* AppDelegate.swift */,
 				BE43E5651B4F25FC00C522FF /* FirstViewController.swift */,
 				BE43E5671B4F25FC00C522FF /* SecondViewController.swift */,
@@ -181,7 +204,9 @@
 		BE43E5791B4F25FC00C522FF /* pblockTests */ = {
 			isa = PBXGroup;
 			children = (
+				BE82A3021B506B6F007A91AA /* ModelSpecs */,
 				BE82A2E51B504FB3007A91AA /* RuleParserSpecs */,
+				BE82A30D1B5089DA007A91AA /* SharedSpecHelpers.swift */,
 				BE43E57C1B4F25FC00C522FF /* Info.plist */,
 				BE82A2D21B5011C3007A91AA /* Frameworks */,
 			);
@@ -256,8 +281,30 @@
 				BE43E5691B4F25FC00C522FF /* Main.storyboard */,
 				BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */,
 				BE43E56C1B4F25FC00C522FF /* Assets.xcassets */,
+				BE82A2ED1B5057D1007A91AA /* Model.xcdatamodeld */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE82A2F11B505AEA007A91AA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BE82A3071B508093007A91AA /* NSManagedObject+pblock.swift */,
+				BE82A2FA1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift */,
+				BE82A2FB1B505B5E007A91AA /* RuleSource.swift */,
+				BE82A2FC1B505B5E007A91AA /* Rule+CoreDataProperties.swift */,
+				BE82A2FD1B505B5E007A91AA /* Rule.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BE82A3021B506B6F007A91AA /* ModelSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				BE82A3031B506B8D007A91AA /* RuleSpec.swift */,
+				BE82A3091B508950007A91AA /* NSManagedObject+pblockSpec.swift */,
+			);
+			path = ModelSpecs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,10 +516,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE82A2EA1B5052DA007A91AA /* DebugLog.swift in Sources */,
+				BE82A3011B505B5E007A91AA /* Rule.swift in Sources */,
+				BE82A3081B508093007A91AA /* NSManagedObject+pblock.swift in Sources */,
 				BE43E5681B4F25FC00C522FF /* SecondViewController.swift in Sources */,
 				BE43E5641B4F25FC00C522FF /* AppDelegate.swift in Sources */,
 				BE82A2E31B504D3B007A91AA /* RuleParser.swift in Sources */,
+				BE82A2FF1B505B5E007A91AA /* RuleSource.swift in Sources */,
+				BE82A3061B5073E7007A91AA /* CoreDataManager.swift in Sources */,
+				BE82A3001B505B5E007A91AA /* Rule+CoreDataProperties.swift in Sources */,
 				BE43E5661B4F25FC00C522FF /* FirstViewController.swift in Sources */,
+				BE82A2EF1B5057D1007A91AA /* Model.xcdatamodeld in Sources */,
+				BE82A2FE1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,7 +534,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE82A30A1B508950007A91AA /* NSManagedObject+pblockSpec.swift in Sources */,
+				BE82A3041B506B8E007A91AA /* RuleSpec.swift in Sources */,
 				BE82A2E71B504FE7007A91AA /* RuleParserSpec.swift in Sources */,
+				BE82A30E1B5089DA007A91AA /* SharedSpecHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +555,7 @@
 			files = (
 				BE82A2EB1B5052DA007A91AA /* DebugLog.swift in Sources */,
 				BE43E59C1B4F262100C522FF /* ActionRequestHandler.swift in Sources */,
+				BE82A2F01B5057D1007A91AA /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,6 +691,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = pblock/pblock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -643,6 +702,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willfleming.pblock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -650,6 +710,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = pblock/pblock.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -793,6 +854,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BE82A2ED1B5057D1007A91AA /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BE82A2EE1B5057D1007A91AA /* Model.xcdatamodel */,
+			);
+			currentVersion = BE82A2EE1B5057D1007A91AA /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BE43E5581B4F25FB00C522FF /* Project object */;
 }
