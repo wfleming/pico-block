@@ -37,6 +37,8 @@
 		BE82A3081B508093007A91AA /* NSManagedObject+pblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A3071B508093007A91AA /* NSManagedObject+pblock.swift */; };
 		BE82A30A1B508950007A91AA /* NSManagedObject+pblockSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A3091B508950007A91AA /* NSManagedObject+pblockSpec.swift */; };
 		BE82A30E1B5089DA007A91AA /* SharedSpecHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A30D1B5089DA007A91AA /* SharedSpecHelpers.swift */; };
+		BE83B0C71B5202F80074FDA3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D01B500F91007A91AA /* Alamofire.framework */; };
+		BE83B0C81B5202F80074FDA3 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D01B500F91007A91AA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE83B0C91B5202F80074FDA3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE83B0C81B5202F80074FDA3 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */,
+				BE83B0C71B5202F80074FDA3 /* Alamofire.framework in Frameworks */,
 				BE82A2E01B5019AE007A91AA /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +211,7 @@
 				BE82A2EC1B5055EC007A91AA /* Supporting Files */,
 				BE82A2CF1B500F6D007A91AA /* Frameworks */,
 				BE43E5711B4F25FC00C522FF /* Info.plist */,
+				BE43E5A51B4F3BA000C522FF /* pblock.entitlements */,
 			);
 			path = pblock;
 			sourceTree = "<group>";
@@ -277,7 +292,6 @@
 		BE82A2EC1B5055EC007A91AA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BE43E5A51B4F3BA000C522FF /* pblock.entitlements */,
 				BE43E5691B4F25FC00C522FF /* Main.storyboard */,
 				BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */,
 				BE43E56C1B4F25FC00C522FF /* Assets.xcassets */,
@@ -315,11 +329,12 @@
 			buildConfigurationList = BE43E58A1B4F25FC00C522FF /* Build configuration list for PBXNativeTarget "pblock" */;
 			buildPhases = (
 				BE43E55C1B4F25FB00C522FF /* Sources */,
-				BE82A2DF1B501825007A91AA /* Copy Carthage Frameworks */,
 				BE43E55D1B4F25FB00C522FF /* Frameworks */,
 				BE43E55E1B4F25FB00C522FF /* Resources */,
 				BE82A2DA1B5014AD007A91AA /* Set Build Number */,
 				BE43E5A41B4F262100C522FF /* Embed App Extensions */,
+				BE82A2DF1B501825007A91AA /* Copy Carthage Frameworks */,
+				BE83B0C91B5202F80074FDA3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

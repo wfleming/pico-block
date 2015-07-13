@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8154.4" systemVersion="15A216g" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="v1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8154.4" systemVersion="15A216g" minimumToolsVersion="Xcode 7.0">
     <entity name="Rule" representedClassName="Rule" syncable="YES">
         <attribute name="actionSelector" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionTypeInt" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
