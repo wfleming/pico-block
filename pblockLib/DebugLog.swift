@@ -44,6 +44,13 @@ func logToGroupLogFile(message: String) {
       print("Could not get group directory: cannot log message \"\(message)\"\n")
     } else {
       let logURL = dirURL!.URLByAppendingPathComponent("events.log")
+      if !fm.fileExistsAtPath(logURL.path!) {
+        "".dataUsingEncoding(NSUTF8StringEncoding)?.writeToURL(logURL, atomically: true)
+        if !fm.fileExistsAtPath(logURL.path!) {
+          print("Failed to create logfile in group directory\n")
+          return
+        }
+      }
       do {
         let fh = try NSFileHandle(forWritingToURL: logURL)
         fh.seekToEndOfFile()
