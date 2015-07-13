@@ -1,5 +1,5 @@
 //
-//  RuleSource+CoreDataProperties.swift
+//  RuleDomain+CoreDataProperties.swift
 //  pblock
 //
 //  Created by Will Fleming on 7/13/15.
@@ -12,10 +12,8 @@
 import Foundation
 import CoreData
 
-extension RuleSource {
+extension RuleDomain {
 
-    @NSManaged var enabled: NSNumber?
-    @NSManaged var url: String?
-    @NSManaged var rules: NSOrderedSet?
+    @NSManaged var domain: String?
 
 }

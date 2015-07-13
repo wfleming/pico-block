@@ -39,6 +39,10 @@
 		BE82A30E1B5089DA007A91AA /* SharedSpecHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82A30D1B5089DA007A91AA /* SharedSpecHelpers.swift */; };
 		BE83B0C71B5202F80074FDA3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D01B500F91007A91AA /* Alamofire.framework */; };
 		BE83B0C81B5202F80074FDA3 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D01B500F91007A91AA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE83B0CD1B5432620074FDA3 /* RuleOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0CC1B5432610074FDA3 /* RuleOptions.swift */; };
+		BE83B0CF1B5436B90074FDA3 /* RuleOptionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */; };
+		BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */; };
+		BE83B0D31B543B320074FDA3 /* RuleDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D11B543B320074FDA3 /* RuleDomain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +141,10 @@
 		BE82A3071B508093007A91AA /* NSManagedObject+pblock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+pblock.swift"; sourceTree = "<group>"; };
 		BE82A3091B508950007A91AA /* NSManagedObject+pblockSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+pblockSpec.swift"; sourceTree = "<group>"; };
 		BE82A30D1B5089DA007A91AA /* SharedSpecHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedSpecHelpers.swift; sourceTree = "<group>"; };
+		BE83B0CC1B5432610074FDA3 /* RuleOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleOptions.swift; sourceTree = "<group>"; };
+		BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleOptionsSpec.swift; sourceTree = "<group>"; };
+		BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RuleDomain+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BE83B0D11B543B320074FDA3 /* RuleDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleDomain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,10 +312,13 @@
 			isa = PBXGroup;
 			children = (
 				BE82A3071B508093007A91AA /* NSManagedObject+pblock.swift */,
+				BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */,
+				BE83B0D11B543B320074FDA3 /* RuleDomain.swift */,
 				BE82A2FA1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift */,
 				BE82A2FB1B505B5E007A91AA /* RuleSource.swift */,
 				BE82A2FC1B505B5E007A91AA /* Rule+CoreDataProperties.swift */,
 				BE82A2FD1B505B5E007A91AA /* Rule.swift */,
+				BE83B0CC1B5432610074FDA3 /* RuleOptions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -316,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				BE82A3031B506B8D007A91AA /* RuleSpec.swift */,
+				BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */,
 				BE82A3091B508950007A91AA /* NSManagedObject+pblockSpec.swift */,
 			);
 			path = ModelSpecs;
@@ -531,6 +543,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE82A2EA1B5052DA007A91AA /* DebugLog.swift in Sources */,
+				BE83B0D31B543B320074FDA3 /* RuleDomain.swift in Sources */,
+				BE83B0CD1B5432620074FDA3 /* RuleOptions.swift in Sources */,
 				BE82A3011B505B5E007A91AA /* Rule.swift in Sources */,
 				BE82A3081B508093007A91AA /* NSManagedObject+pblock.swift in Sources */,
 				BE43E5681B4F25FC00C522FF /* SecondViewController.swift in Sources */,
@@ -540,6 +554,7 @@
 				BE82A3061B5073E7007A91AA /* CoreDataManager.swift in Sources */,
 				BE82A3001B505B5E007A91AA /* Rule+CoreDataProperties.swift in Sources */,
 				BE43E5661B4F25FC00C522FF /* FirstViewController.swift in Sources */,
+				BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */,
 				BE82A2EF1B5057D1007A91AA /* Model.xcdatamodeld in Sources */,
 				BE82A2FE1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift in Sources */,
 			);
@@ -549,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE83B0CF1B5436B90074FDA3 /* RuleOptionsSpec.swift in Sources */,
 				BE82A30A1B508950007A91AA /* NSManagedObject+pblockSpec.swift in Sources */,
 				BE82A3041B506B8E007A91AA /* RuleSpec.swift in Sources */,
 				BE82A2E71B504FE7007A91AA /* RuleParserSpec.swift in Sources */,

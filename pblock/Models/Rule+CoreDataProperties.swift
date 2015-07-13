@@ -2,7 +2,7 @@
 //  Rule+CoreDataProperties.swift
 //  pblock
 //
-//  Created by Will Fleming on 7/10/15.
+//  Created by Will Fleming on 7/13/15.
 //  Copyright © 2015 Will Fleming. All rights reserved.
 //
 //  Delete this file and regenerate it using "Create NSManagedObject Subclass…"
@@ -14,11 +14,14 @@ import CoreData
 
 extension Rule {
 
-    @NSManaged var sourceText: String?
-    @NSManaged var actionTypeInt: NSNumber?
     @NSManaged var actionSelector: String?
+    @NSManaged var actionTypeRaw: NSNumber?
+    @NSManaged var sourceText: String?
     @NSManaged var triggerUrlFilter: String?
-    @NSManaged var triggerIfDomain: String?
+    @NSManaged var triggerResourceTypeRaw: NSNumber?
+    @NSManaged var triggerLoadTypeRaw: NSNumber?
     @NSManaged var source: RuleSource?
+    @NSManaged var triggerIfDomain: NSOrderedSet?
+    @NSManaged var triggerUnlessDomain: NSOrderedSet?
 
 }
