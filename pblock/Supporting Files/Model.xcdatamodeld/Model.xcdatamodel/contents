@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="v1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8154.4" systemVersion="15A216g" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="v1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8175.2" systemVersion="15A244d" minimumToolsVersion="Xcode 7.0">
     <entity name="Rule" representedClassName="Rule" syncable="YES">
         <attribute name="actionSelector" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionTypeRaw" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
@@ -11,7 +11,7 @@
         <relationship name="triggerIfDomain" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RuleDomain" syncable="YES"/>
         <relationship name="triggerUnlessDomain" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RuleDomain" syncable="YES"/>
     </entity>
-    <entity name="RuleDomain" representedClassName=".RuleDomain" syncable="YES">
+    <entity name="RuleDomain" representedClassName="RuleDomain" syncable="YES">
         <attribute name="domain" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="RuleSource" representedClassName="RuleSource" syncable="YES">
@@ -21,7 +21,7 @@
     </entity>
     <elements>
         <element name="Rule" positionX="-297" positionY="-63" width="128" height="180"/>
-        <element name="RuleSource" positionX="-54" positionY="-9" width="128" height="88"/>
         <element name="RuleDomain" positionX="-171" positionY="9" width="128" height="60"/>
+        <element name="RuleSource" positionX="-54" positionY="-9" width="128" height="88"/>
     </elements>
 </model>
