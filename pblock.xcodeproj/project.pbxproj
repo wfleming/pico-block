@@ -348,6 +348,7 @@
 				BE43E5A41B4F262100C522FF /* Embed App Extensions */,
 				BE82A2DF1B501825007A91AA /* Copy Carthage Frameworks */,
 				BE83B0C91B5202F80074FDA3 /* Embed Frameworks */,
+				BE4FE9101B88FA1B0075AD95 /* Lint Source */,
 			);
 			buildRules = (
 			);
@@ -507,6 +508,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		BE4FE9101B88FA1B0075AD95 /* Lint Source */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Lint Source";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${PROJECT_DIR}/pblock\n${PROJECT_DIR}/vendor/swiftlint/swiftlint";
+		};
 		BE82A2DA1B5014AD007A91AA /* Set Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
