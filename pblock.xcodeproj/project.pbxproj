@@ -18,6 +18,7 @@
 		BE43E5A01B4F262100C522FF /* pblock-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE43E5971B4F262100C522FF /* pblock-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BE4FE90F1B88DC2B0075AD95 /* ABPRuleFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE90E1B88DC2B0075AD95 /* ABPRuleFileParser.swift */; };
 		BE4FE9121B8902040075AD95 /* ABPRuleFileParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE9111B8902040075AD95 /* ABPRuleFileParserSpec.swift */; };
+		BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE9131B890DB30075AD95 /* ParsedRule.swift */; };
 		BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2CD1B500F62007A91AA /* CoreData.framework */; };
 		BE82A2D51B5011DA007A91AA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D31B5011DA007A91AA /* Nimble.framework */; };
 		BE82A2D61B5011DA007A91AA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D41B5011DA007A91AA /* Quick.framework */; };
@@ -127,6 +128,7 @@
 		BE43E5A61B4F3BB400C522FF /* pblock-extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "pblock-extension.entitlements"; sourceTree = "<group>"; };
 		BE4FE90E1B88DC2B0075AD95 /* ABPRuleFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABPRuleFileParser.swift; sourceTree = "<group>"; };
 		BE4FE9111B8902040075AD95 /* ABPRuleFileParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABPRuleFileParserSpec.swift; sourceTree = "<group>"; };
+		BE4FE9131B890DB30075AD95 /* ParsedRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsedRule.swift; sourceTree = "<group>"; };
 		BE82A2CD1B500F62007A91AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BE82A2D01B500F91007A91AA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		BE82A2D31B5011DA007A91AA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		BE82A2E11B504CF4007A91AA /* RuleParser */ = {
 			isa = PBXGroup;
 			children = (
+				BE4FE9131B890DB30075AD95 /* ParsedRule.swift */,
 				BE4FE90E1B88DC2B0075AD95 /* ABPRuleFileParser.swift */,
 				BE82A2E21B504D3B007A91AA /* ABPRuleParser.swift */,
 			);
@@ -569,6 +572,7 @@
 				BE43E5681B4F25FC00C522FF /* SecondViewController.swift in Sources */,
 				BE43E5641B4F25FC00C522FF /* AppDelegate.swift in Sources */,
 				BE82A2E31B504D3B007A91AA /* ABPRuleParser.swift in Sources */,
+				BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */,
 				BE82A2FF1B505B5E007A91AA /* RuleSource.swift in Sources */,
 				BE82A3061B5073E7007A91AA /* CoreDataManager.swift in Sources */,
 				BE82A3001B505B5E007A91AA /* Rule+CoreDataProperties.swift in Sources */,

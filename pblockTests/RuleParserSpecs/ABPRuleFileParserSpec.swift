@@ -13,11 +13,9 @@ import CoreData
 
 class ABPRuleFileParserSpec : QuickSpec {
   override func spec() {
-    let managedObjectContext = self.createInMemoryCoreDataCtx()
-
     describe("initialization") {
       it("inits with a string & context") {
-        let parser = ABPRuleFileParser(fileSource: "sample text", coreDataCtx: managedObjectContext)
+        let parser = ABPRuleFileParser(fileSource: "sample text")
         expect(parser).notTo(beNil())
       }
 
@@ -33,7 +31,7 @@ class ABPRuleFileParserSpec : QuickSpec {
         }
         try! "sample text".writeToURL(tmpPath, atomically: true, encoding: NSUTF8StringEncoding)
 
-        let parser = ABPRuleFileParser(fileURL: tmpPath, coreDataCtx: managedObjectContext)
+        let parser = ABPRuleFileParser(fileURL: tmpPath)
         expect(parser).notTo(beNil())
       }
     }
@@ -42,7 +40,7 @@ class ABPRuleFileParserSpec : QuickSpec {
       it("parses some simple rule lines") {
         let str = "example.com\n" +
                   "foo.bar"
-        let parser = ABPRuleFileParser(fileSource: str, coreDataCtx: managedObjectContext)
+        let parser = ABPRuleFileParser(fileSource: str)
         expect(parser.parsedRules().count).to(equal(2))
       }
 
@@ -51,7 +49,7 @@ class ABPRuleFileParserSpec : QuickSpec {
                   "# comment 1\n" +
                   "! comment 2\n" +
                   "foo.bar"
-        let parser = ABPRuleFileParser(fileSource: str, coreDataCtx: managedObjectContext)
+        let parser = ABPRuleFileParser(fileSource: str)
         expect(parser.parsedRules().count).to(equal(2))
       }
     }

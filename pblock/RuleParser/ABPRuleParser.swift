@@ -33,7 +33,6 @@ https://github.com/gorhill/uBlock/wiki/Filter-syntax-extensions
 class ABPRuleParser: NSObject {
   // class members
   private(set) var ruleText: String
-  private(set) var coreDataCtx: NSManagedObjectContext
 
   // these vars are for tracking state during parsing
   private var action = RuleActionType.Block
@@ -47,15 +46,14 @@ class ABPRuleParser: NSObject {
   private var unsupported = false
   private var didParse = false
 
-  init(_ ruleText: String, coreDataCtx: NSManagedObjectContext) {
+  init(_ ruleText: String) {
     self.ruleText = ruleText.stringByTrimmingCharactersInSet(
       NSCharacterSet.whitespaceAndNewlineCharacterSet()
     )
-    self.coreDataCtx = coreDataCtx
   }
 
   // primary public interface: call to get back all rules parsed from the text
-  func parsedRule() throws -> Rule? {
+  func parsedRule() throws -> ParsedRule? {
     if ruleText.hasPrefix("#") || ruleText.hasPrefix("!") {
       throw ABPRuleParserError("This is a comment line: you shouldn't try to parse these")
     }
@@ -229,40 +227,20 @@ class ABPRuleParser: NSObject {
     return hostname
   }
 
-  private func ruleDomainSetFromDomainStrings(domains: Array<String>) -> NSOrderedSet {
-    return NSOrderedSet(array: domains.map({ (d: String) -> RuleDomain in
-      let rd = RuleDomain(inContext: coreDataCtx)
-      rd.domain = d
-      return rd
-    }))
-  }
-
-  private func buildParsedRule() -> Rule? {
+  private func buildParsedRule() -> ParsedRule? {
     if unsupported {
       return nil
     }
 
-    let r = Rule(inContext: coreDataCtx)
-
-    r.sourceText = ruleText
-    r.actionType =  action
-    if isRegex {
-      r.triggerUrlFilter = filter
-    } else {
-      r.triggerUrlFilter = globToRegex(filter!)
-    }
-    if RuleActionType.CssDisplayNone == action {
-      r.actionSelector = selector
-    }
-    r.triggerResourceTypes = resourceTypes
-    r.triggerLoadTypes = loadTypes
-
-    if ifDomains.count > 0 {
-      r.triggerIfDomain = ruleDomainSetFromDomainStrings(ifDomains)
-    }
-    if unlessDomains.count > 0 {
-      r.triggerUnlessDomain = ruleDomainSetFromDomainStrings(unlessDomains)
-    }
-    return r
+    return ParsedRule(
+      sourceText: ruleText,
+      actionSelector: selector,
+      actionType:  action,
+      triggerUrlFilter: (isRegex ? filter : globToRegex(filter!)),
+      triggerResourceTypes: resourceTypes,
+      triggerLoadTypes: loadTypes,
+      triggerIfDomain: (ifDomains.count > 0  ? ifDomains : nil),
+      triggerUnlessDomain: (unlessDomains.count > 0  ? unlessDomains : nil)
+    )
   }
 }

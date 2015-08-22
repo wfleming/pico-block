@@ -5,11 +5,9 @@ import CoreData
 
 class ABPRuleParserSpec : QuickSpec {
   override func spec() {
-    let managedObjectContext = self.createInMemoryCoreDataCtx()
-
     describe("initialization") {
       it("sets the ruleText content") {
-        let parser = ABPRuleParser("sample text", coreDataCtx: managedObjectContext)
+        let parser = ABPRuleParser("sample text")
         expect(parser.ruleText).to(equal("sample text"))
       }
     }
@@ -18,7 +16,7 @@ class ABPRuleParserSpec : QuickSpec {
       it("raises exception for comment") {
         //NOTE: Nimble's raise expectations seem to have problems with swift 2
         var didRaise = false
-        let parser1 = ABPRuleParser("# comment", coreDataCtx: managedObjectContext)
+        let parser1 = ABPRuleParser("# comment")
 
         do {
           try parser1.parsedRule()
@@ -28,7 +26,7 @@ class ABPRuleParserSpec : QuickSpec {
         expect(didRaise).to(beTrue())
 
         didRaise = false
-        let parser2 = ABPRuleParser("! comment", coreDataCtx: managedObjectContext)
+        let parser2 = ABPRuleParser("! comment")
         do {
           try parser2.parsedRule()
         } catch {
@@ -38,89 +36,77 @@ class ABPRuleParserSpec : QuickSpec {
       }
 
       it("parses a simple hostname") {
-        let rule = try! ABPRuleParser("example.com", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("example.com").parsedRule()
         dlog("the rule filter: \(rule?.triggerUrlFilter)")
         expect(rule?.actionType).to(equal(RuleActionType.Block))
         expect(rule?.triggerUrlFilter).to(equal("example\\.com"))
       }
 
       it("parses a simple hostname with anchor") {
-        let rule1 = try! ABPRuleParser("||example.com", coreDataCtx: managedObjectContext).parsedRule()
+        let rule1 = try! ABPRuleParser("||example.com").parsedRule()
         expect(rule1?.triggerUrlFilter).to(equal(".*\\.example\\.com"))
 
-        let rule2 = try! ABPRuleParser("||.example.com", coreDataCtx: managedObjectContext).parsedRule()
+        let rule2 = try! ABPRuleParser("||.example.com").parsedRule()
         expect(rule2?.triggerUrlFilter).to(equal(".*\\.example\\.com"))
 
-        let rule3 = try! ABPRuleParser("||*example.com", coreDataCtx: managedObjectContext).parsedRule()
+        let rule3 = try! ABPRuleParser("||*example.com").parsedRule()
         expect(rule3?.triggerUrlFilter).to(equal(".*\\.example\\.com"))
 
-        let rule4 = try! ABPRuleParser("example.com||", coreDataCtx: managedObjectContext).parsedRule()
+        let rule4 = try! ABPRuleParser("example.com||").parsedRule()
         expect(rule4?.triggerUrlFilter).to(equal("example\\.com\\..*"))
 
-        let rule5 = try! ABPRuleParser("example.com.||", coreDataCtx: managedObjectContext).parsedRule()
+        let rule5 = try! ABPRuleParser("example.com.||").parsedRule()
         expect(rule5?.triggerUrlFilter).to(equal("example\\.com\\..*"))
 
-        let rule6 = try! ABPRuleParser("example.com*||", coreDataCtx: managedObjectContext).parsedRule()
+        let rule6 = try! ABPRuleParser("example.com*||").parsedRule()
         expect(rule6?.triggerUrlFilter).to(equal("example\\.com\\..*"))
       }
 
       it("parses a simple hostname exception") {
-        let rule = try! ABPRuleParser("@@example.com", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("@@example.com").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.IgnorePreviousRules))
         expect(rule?.triggerUrlFilter).to(equal("example\\.com"))
       }
 
       it("parses a css hide rule") {
-        let rule = try! ABPRuleParser("example.com##div.foo", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("example.com##div.foo").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.CssDisplayNone))
         expect(rule?.triggerUrlFilter).to(equal(".*"))
         expect(rule?.actionSelector).to(equal("div.foo"))
       }
 
       it("doesn't parse css hide exception") {
-        let rule = try! ABPRuleParser("@@example.com##div.foo", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("@@example.com##div.foo").parsedRule()
         expect(rule).to(beNil())
       }
 
       it("doesn't parse combined element-exception syntax") {
-        let rule = try! ABPRuleParser("example.com#@div.foo", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("example.com#@div.foo").parsedRule()
         expect(rule).to(beNil())
       }
 
       it("parses advanced options") {
-        let rule = try! ABPRuleParser("bad.js$third-party,domains=foo.bar|~bah.com,script", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("bad.js$third-party,domains=foo.bar|~bah.com,script").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.Block))
         expect(rule?.triggerUrlFilter).to(equal("bad\\.js"))
         expect(rule?.triggerLoadTypes).to(equal(RuleLoadTypeOptions.ThirdParty))
         expect(rule?.triggerResourceTypes).to(equal(RuleResourceTypeOptions.Script))
-        let ifDomains = rule?.triggerIfDomain?.map({ (rd: AnyObject) -> String in
-          return rd.domain!
-        })
-        expect(ifDomains).to(equal(["foo.bar"]))
-        let unlessDomains = rule?.triggerUnlessDomain?.map({ (rd: AnyObject) -> String in
-          return rd.domain!
-        })
-        expect(unlessDomains).to(equal(["bah.com"]))
+        expect(rule?.triggerIfDomain).to(equal(["foo.bar"]))
+        expect(rule?.triggerUnlessDomain).to(equal(["bah.com"]))
       }
 
       it("parses advanced options with css hide") {
-        let rule = try! ABPRuleParser("example.com,~foo.bar##div$~third-party", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("example.com,~foo.bar##div$~third-party").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.CssDisplayNone))
         expect(rule?.actionSelector).to(equal("div"))
         expect(rule?.triggerUrlFilter).to(equal(".*"))
         expect(rule?.triggerLoadTypes).to(equal(RuleLoadTypeOptions.FirstParty))
-        let ifDomains = rule?.triggerIfDomain?.map({ (rd: AnyObject) -> String in
-          return rd.domain!
-        })
-        expect(ifDomains).to(equal(["example.com"]))
-        let unlessDomains = rule?.triggerUnlessDomain?.map({ (rd: AnyObject) -> String in
-          return rd.domain!
-        })
-        expect(unlessDomains).to(equal(["foo.bar"]))
+        expect(rule?.triggerIfDomain).to(equal(["example.com"]))
+        expect(rule?.triggerUnlessDomain).to(equal(["foo.bar"]))
       }
 
       it("parses a regex rule") {
-        let rule = try! ABPRuleParser("/example\\.[a-z]+/", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("/example\\.[a-z]+/").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.Block))
         //NOTE: I'm honestly not sure how other tools behave with escaped chars inside a regex.
         //Right now we unescape them (it's easier), but would be more correct to handle them.
@@ -129,13 +115,13 @@ class ABPRuleParserSpec : QuickSpec {
       }
 
       it("parses exception regex rule") {
-        let rule = try! ABPRuleParser("@@/example\\.[a-z]+/", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("@@/example\\.[a-z]+/").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.IgnorePreviousRules))
         expect(rule?.triggerUrlFilter).to(equal("example.[a-z]+"))
       }
 
       it("parses regex rule with options") {
-        let rule = try! ABPRuleParser("/example\\.[a-z]+/$script", coreDataCtx: managedObjectContext).parsedRule()
+        let rule = try! ABPRuleParser("/example\\.[a-z]+/$script").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.Block))
         expect(rule?.triggerUrlFilter).to(equal("example.[a-z]+"))
         expect(rule?.triggerResourceTypes).to(equal(RuleResourceTypeOptions.Script))
