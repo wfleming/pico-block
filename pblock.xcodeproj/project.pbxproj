@@ -520,7 +520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ${PROJECT_DIR}/pblock\n${PROJECT_DIR}/vendor/swiftlint/swiftlint";
+			shellScript = "# currently disabled because it throws errors for correct code\n#cd ${PROJECT_DIR}/pblock\n#${PROJECT_DIR}/vendor/swiftlint/swiftlint";
 		};
 		BE82A2DA1B5014AD007A91AA /* Set Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
