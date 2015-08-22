@@ -62,3 +62,11 @@ func logToGroupLogFile(message: String) {
     }
   #endif
 }
+
+func globToRegex(glob: String) -> String {
+  return glob
+    .stringByReplacingOccurrencesOfString(".", withString: "\\.")
+    .stringByReplacingOccurrencesOfString("*", withString: ".*")
+    // see https://adblockplus.org/en/filters#separators
+    .stringByReplacingOccurrencesOfString("^", withString: "[^a-zA-z0-9_\\.\\-%]")
+}

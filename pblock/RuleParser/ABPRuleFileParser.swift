@@ -11,17 +11,17 @@ import Foundation
 /**
 Parse an entire set of ABP rules using ABPRuleParser
 */
-class ABPRuleFileParser {
+class ABPRuleFileParser: RuleFileParserProtocol {
   private var lines: Array<String>
   private var rules: Array<ParsedRule>? = nil
 
-  init(fileSource: String) {
+  required init(fileSource: String) {
     self.lines = fileSource.componentsSeparatedByCharactersInSet(
       NSCharacterSet.newlineCharacterSet()
     )
   }
 
-  convenience init(fileURL: NSURL) {
+  convenience required init(fileURL: NSURL) {
     let fileContents = try! String(contentsOfURL: fileURL, encoding: NSUTF8StringEncoding)
     self.init(fileSource: fileContents)
   }

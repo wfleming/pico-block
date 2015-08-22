@@ -204,14 +204,6 @@ class ABPRuleParser: NSObject {
     }
   }
 
-  private func globToRegex(glob: String) -> String {
-    return glob
-      .stringByReplacingOccurrencesOfString(".", withString: "\\.")
-      .stringByReplacingOccurrencesOfString("*", withString: ".*")
-      // see https://adblockplus.org/en/filters#separators
-      .stringByReplacingOccurrencesOfString("^", withString: "[^a-zA-z0-9_\\.\\-%]")
-  }
-
   private func transformHostAnchoring(hostname: String) -> String {
     // cleanup: `||example.com`, `||*.example.com^`, `||.example.com/*`
     var hostname = hostname.stringByReplacingOccurrencesOfString("||*", withString: "||")
