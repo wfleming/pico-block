@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
-    logToGroupLogFile("\(NSDate().description) app became active")
+    logToGroupLogFile("app.active \(NSDate().description)")
   }
 
   func applicationWillTerminate(application: UIApplication) {
