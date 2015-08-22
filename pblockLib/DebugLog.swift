@@ -54,19 +54,12 @@ func logToGroupLogFile(message: String) {
       do {
         let fh = try NSFileHandle(forWritingToURL: logURL)
         fh.seekToEndOfFile()
-        fh.writeData("$\(message)\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let logLine = "\(NSDate().description) $\(message)\n"
+        fh.writeData(logLine.dataUsingEncoding(NSUTF8StringEncoding)!)
         fh.closeFile()
       } catch {
         print("Error encountered trying to write message \"\(message)\"to group log: \(error)\n")
       }
     }
   #endif
-}
-
-func globToRegex(glob: String) -> String {
-  return glob
-    .stringByReplacingOccurrencesOfString(".", withString: "\\.")
-    .stringByReplacingOccurrencesOfString("*", withString: ".*")
-    // see https://adblockplus.org/en/filters#separators
-    .stringByReplacingOccurrencesOfString("^", withString: "[^a-zA-z0-9_\\.\\-%]")
 }
