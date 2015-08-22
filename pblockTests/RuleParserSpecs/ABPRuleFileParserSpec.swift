@@ -1,0 +1,59 @@
+//
+//  ABPRuleFileParserSpec.swift
+//  pblock
+//
+//  Created by Will Fleming on 8/22/15.
+//  Copyright © 2015 Will Fleming. All rights reserved.
+//
+
+import Quick
+import Nimble
+import CoreData
+@testable import pblock
+
+class ABPRuleFileParserSpec : QuickSpec {
+  override func spec() {
+    let managedObjectContext = self.createInMemoryCoreDataCtx()
+
+    describe("initialization") {
+      it("inits with a string & context") {
+        let parser = ABPRuleFileParser(fileSource: "sample text", coreDataCtx: managedObjectContext)
+        expect(parser).notTo(beNil())
+      }
+
+      it("inits with a file URL & context") {
+        let tmpPath = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+          .URLByAppendingPathComponent("testRules")
+        defer {
+          do {
+            try NSFileManager.defaultManager().removeItemAtURL(tmpPath)
+          } catch let error {
+            dlog("deleting tmp file threw error: \(error)")
+          }
+        }
+        try! "sample text".writeToURL(tmpPath, atomically: true, encoding: NSUTF8StringEncoding)
+
+        let parser = ABPRuleFileParser(fileURL: tmpPath, coreDataCtx: managedObjectContext)
+        expect(parser).notTo(beNil())
+      }
+    }
+
+    describe("parsing") {
+      it("parses some simple rule lines") {
+        let str = "example.com\n" +
+                  "foo.bar"
+        let parser = ABPRuleFileParser(fileSource: str, coreDataCtx: managedObjectContext)
+        expect(parser.parsedRules().count).to(equal(2))
+      }
+
+      it("parses some rule lines & some comments") {
+        let str = "example.com\n" +
+                  "# comment 1\n" +
+                  "! comment 2\n" +
+                  "foo.bar"
+        let parser = ABPRuleFileParser(fileSource: str, coreDataCtx: managedObjectContext)
+        expect(parser.parsedRules().count).to(equal(2))
+      }
+    }
+  }
+}
