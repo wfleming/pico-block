@@ -11,7 +11,7 @@ import Foundation
 /**
 Used for Rule.actionType values: this can be a simple enum since a Rule can only have one value
 */
-enum RuleActionType : Int16 {
+enum RuleActionType: Int16 {
   case Invalid = 0
   case Block
   case BlockCookies
@@ -42,14 +42,14 @@ enum RuleActionType : Int16 {
 Used for Rule.triggerResourceTypeInt values: this is an array in JSON, so this is stored as a
 bitfield options set.
 */
-struct RuleResourceTypeOptions : OptionSetType {
+struct RuleResourceTypeOptions: OptionSetType {
   let rawValue: Int16
   init(rawValue: Int16) { self.rawValue = rawValue }
 
-  static var None       = RuleResourceTypeOptions(rawValue: 0)
-  static var Script     = RuleResourceTypeOptions(rawValue: 1 << 0)
-  static var Image      = RuleResourceTypeOptions(rawValue: 1 << 1)
-  static var StyleSheet = RuleResourceTypeOptions(rawValue: 1 << 2)
+  static let None       = RuleResourceTypeOptions(rawValue: 0)
+  static let Script     = RuleResourceTypeOptions(rawValue: 1 << 0)
+  static let Image      = RuleResourceTypeOptions(rawValue: 1 << 1)
+  static let StyleSheet = RuleResourceTypeOptions(rawValue: 1 << 2)
 
   func jsonValue() -> [String]? {
     if RuleResourceTypeOptions.None.rawValue == rawValue {
@@ -73,13 +73,13 @@ struct RuleResourceTypeOptions : OptionSetType {
 Used for Rule.triggerLoadTypeInt values: this is an array in JSON, so this is stored as a
 bitfield options set.
 */
-struct RuleLoadTypeOptions : OptionSetType {
+struct RuleLoadTypeOptions: OptionSetType {
   let rawValue: Int16
   init(rawValue: Int16) { self.rawValue = rawValue }
 
-  static var None       = RuleLoadTypeOptions(rawValue: 0)
-  static var FirstParty = RuleLoadTypeOptions(rawValue: 1 << 0)
-  static var ThirdParty = RuleLoadTypeOptions(rawValue: 1 << 1)
+  static let None       = RuleLoadTypeOptions(rawValue: 0)
+  static let FirstParty = RuleLoadTypeOptions(rawValue: 1 << 0)
+  static let ThirdParty = RuleLoadTypeOptions(rawValue: 1 << 1)
 
   func jsonValue() -> [String]? {
     if RuleLoadTypeOptions.None.rawValue == rawValue {

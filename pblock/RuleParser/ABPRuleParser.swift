@@ -9,6 +9,19 @@
 import Foundation
 import CoreData
 
+let abpRuleParserErrorDomain = "com.willfleming.pblock.rule-parser"
+let abpRuleParserErrorInvalidRuleCode = 1
+
+class ABPRuleParserError: NSError {
+  convenience init(_ message: String) {
+    self.init(
+      domain: abpRuleParserErrorDomain,
+      code: abpRuleParserErrorInvalidRuleCode,
+      userInfo: [NSLocalizedDescriptionKey: message]
+    )
+  }
+}
+
 /**
 Parse AdBlock+/uBlock, etc. format rules into our schema (which is modeled on the Safari
 Content Blocker Extension JSON schema)
@@ -17,7 +30,7 @@ Syntax references:
 https://adblockplus.org/en/filter-cheatsheet
 https://github.com/gorhill/uBlock/wiki/Filter-syntax-extensions
 */
-class ABPRuleParser : NSObject {
+class ABPRuleParser: NSObject {
   // class members
   private(set) var ruleText: String
   private(set) var coreDataCtx: NSManagedObjectContext
@@ -35,7 +48,9 @@ class ABPRuleParser : NSObject {
   private var didParse = false
 
   init(_ ruleText: String, coreDataCtx: NSManagedObjectContext) {
-    self.ruleText = ruleText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    self.ruleText = ruleText.stringByTrimmingCharactersInSet(
+      NSCharacterSet.whitespaceAndNewlineCharacterSet()
+    )
     self.coreDataCtx = coreDataCtx
   }
 
@@ -56,7 +71,7 @@ class ABPRuleParser : NSObject {
 
   // parse the rule text into structured attributes
   private func doParse() {
-    if (didParse) {
+    if didParse {
       return
     }
     didParse = true
@@ -105,9 +120,11 @@ class ABPRuleParser : NSObject {
     }
 
     // regex?
-    if ( subject.hasPrefix("/") && subject.hasSuffix("/") && subject.characters.count > 2 ) {
+    if subject.hasPrefix("/") && subject.hasSuffix("/") && subject.characters.count > 2 {
       isRegex = true
-      filter = subject.substringWithRange(Range(start:subject.startIndex.successor(), end:subject.endIndex.predecessor()))
+      filter = subject.substringWithRange(
+        Range(start:subject.startIndex.successor(), end:subject.endIndex.predecessor())
+      )
       return
     }
 
@@ -122,7 +139,10 @@ class ABPRuleParser : NSObject {
   }
 
   private func doesMatch(pattern: NSRegularExpression, _ subject: String) -> Bool {
-    return pattern.matchesInString(subject, options: NSMatchingOptions(rawValue: 0), range: NSRangeFromString(ruleText)).count > 0
+    return pattern.matchesInString(subject,
+      options: NSMatchingOptions(rawValue: 0),
+      range: NSRangeFromString(ruleText)
+    ).count > 0
   }
 
   private func parseOptions(optString: String) {
@@ -164,7 +184,7 @@ class ABPRuleParser : NSObject {
       }
     }
 
-    if(opts.count > 0) {
+    if opts.count > 0 {
       dlog("Some options in rule \"\(ruleText)\" are unsupported: \(opts)")
     }
   }
@@ -210,7 +230,7 @@ class ABPRuleParser : NSObject {
   }
 
   private func ruleDomainSetFromDomainStrings(domains: Array<String>) -> NSOrderedSet {
-    return NSOrderedSet(array: domains.map({ (d:String) -> RuleDomain in
+    return NSOrderedSet(array: domains.map({ (d: String) -> RuleDomain in
       let rd = RuleDomain(inContext: coreDataCtx)
       rd.domain = d
       return rd

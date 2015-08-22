@@ -12,7 +12,7 @@ import CoreData
 @objc(Rule)
 class Rule: NSManagedObject {
 
-  var actionType : RuleActionType {
+  var actionType: RuleActionType {
     get {
       if nil == actionTypeRaw {
         return RuleActionType.Invalid
@@ -35,7 +35,7 @@ class Rule: NSManagedObject {
   won't get triggered, so the coredata serialized value won't be updated. So, for now, never mutate
   the value of loadTypes on an instance, always set it to a new value. i.e. don't use unionInPlace.
   */
-  var triggerLoadTypes : RuleLoadTypeOptions {
+  var triggerLoadTypes: RuleLoadTypeOptions {
     get {
       if nil == triggerLoadTypeRaw {
         return RuleLoadTypeOptions.None
@@ -53,7 +53,7 @@ class Rule: NSManagedObject {
   }
 
   // NB: same caution as loadTypes above
-  var triggerResourceTypes : RuleResourceTypeOptions {
+  var triggerResourceTypes: RuleResourceTypeOptions {
     get {
       if nil == triggerResourceTypeRaw {
         return RuleResourceTypeOptions.None
