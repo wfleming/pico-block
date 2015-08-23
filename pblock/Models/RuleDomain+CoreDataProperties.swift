@@ -2,7 +2,7 @@
 //  RuleDomain+CoreDataProperties.swift
 //  pblock
 //
-//  Created by Will Fleming on 7/13/15.
+//  Created by Will Fleming on 8/22/15.
 //  Copyright © 2015 Will Fleming. All rights reserved.
 //
 //  Delete this file and regenerate it using "Create NSManagedObject Subclass…"

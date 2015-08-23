@@ -11,6 +11,8 @@ import CoreData
 
 // a class to keep all the CoreData boilerplate out of the app delegate
 class CoreDataManager: NSObject {
+  static let sharedInstance = CoreDataManager()
+
   lazy var managedObjectModel: NSManagedObjectModel? = {
     let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension:"momd")
     if  nil == modelURL {
@@ -28,9 +30,8 @@ class CoreDataManager: NSObject {
     }
 
     let fm = NSFileManager.defaultManager()
-    let shouldPopulateDefaultData = !fm.fileExistsAtPath(storeURL!.path!)
 
-    var coordinator = NSPersistentStoreCoordinator()
+    var coordinator = NSPersistentStoreCoordinator(managedObjectModel: model!)
     let opts = [
       NSMigratePersistentStoresAutomaticallyOption: true,
       NSInferMappingModelAutomaticallyOption: true

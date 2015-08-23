@@ -17,8 +17,11 @@ extension NSManagedObject {
     if nil != entity {
       self.init(entity: entity!, insertIntoManagedObjectContext:managedObjectContext)
     } else {
-      // this is going to fail spectacularly
-      self.init(entity:NSEntityDescription(), insertIntoManagedObjectContext:managedObjectContext)
+      // this is going to fail spectacularly: abort immediately, but also call init to make
+      // the compiler happy
+      dlog("FATAL: could not find the correct entity in \(managedObjectContext)")
+      abort()
+      //self.init(entity:NSEntityDescription(), insertIntoManagedObjectContext:managedObjectContext)
     }
   }
 

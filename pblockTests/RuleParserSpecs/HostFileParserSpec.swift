@@ -54,6 +54,14 @@ class HostFileParserSpec : QuickSpec {
         expect(parser.parsedRules()[0].triggerUrlFilter).to(equal("example\\.com"))
       }
 
+      it("parses lines that are just a host") {
+        let str = "example.com"
+        let parser = HostFileParser(fileSource: str)
+        expect(parser.parsedRules().count).to(equal(1))
+        expect(parser.parsedRules()[0].actionType).to(equal(RuleActionType.Block))
+        expect(parser.parsedRules()[0].triggerUrlFilter).to(equal("example\\.com"))
+      }
+
       it("parses some rule lines & some comments") {
         let str = "127.0.0.1 example.com\n" +
                   "# comment 1\n" +

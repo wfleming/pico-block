@@ -17,8 +17,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
     let item = NSExtensionItem()
 
     let fm = NSFileManager.defaultManager()
-    let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
-    let filePathURL = dirURL.URLByAppendingPathComponent("blockRules.json")
+    let filePathURL = rulesJSONPath()
 
     if fm.fileExistsAtPath(filePathURL.path!) {
       let attachment = NSItemProvider(contentsOfURL: filePathURL)!

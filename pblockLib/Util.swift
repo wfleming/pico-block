@@ -8,10 +8,19 @@
 
 import Foundation
 
+// convert an ABP glob pattern to a regex string
 func globToRegex(glob: String) -> String {
   return glob
     .stringByReplacingOccurrencesOfString(".", withString: "\\.")
     .stringByReplacingOccurrencesOfString("*", withString: ".*")
     // see https://adblockplus.org/en/filters#separators
     .stringByReplacingOccurrencesOfString("^", withString: "[^a-zA-z0-9_\\.\\-%]")
+}
+
+// get the path shared by app & extension for the rules JSON
+func rulesJSONPath() -> NSURL {
+  let fm = NSFileManager.defaultManager()
+  let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
+  let filePathURL = dirURL.URLByAppendingPathComponent("blockRules.json")
+  return filePathURL
 }

@@ -14,18 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-  lazy private(set) var coreDataMgr = {
-    return CoreDataManager()
-  }()
-  var managedObjectCtx: NSManagedObjectContext {
-    get {
-      return coreDataMgr.managedObjectContext!
-    }
-  }
-
   func application(application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+    UserPrefs.sharedInstance.firstRun {
+      DefaultData.setup()
+    }
     return true
   }
 

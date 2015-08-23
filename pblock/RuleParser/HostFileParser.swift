@@ -33,11 +33,7 @@ class HostFileParser: RuleFileParserProtocol {
       line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).last
     }
     let nonEmptyHostName = { (host: String?) -> Bool in
-      if let h = host {
-        return !h.isEmpty
-      } else {
-        return false
-      }
+      !(host?.isEmpty ?? true)
     }
     let unwrapStr = { (str: String?) -> String in str! }
     let ruleFromLine = { (host: String) -> ParsedRule in
