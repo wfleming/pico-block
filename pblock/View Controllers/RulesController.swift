@@ -21,7 +21,6 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
         } else {
           self.navigationItem.title = "Rules"
         }
-        controllerWillChangeContent(frc)
       }
     }
   }
@@ -79,7 +78,7 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
           coreDataMgr = CoreDataManager.sharedInstance //WTF? this gets set, then is nil
           let fetchRequest: NSFetchRequest? = coreDataMgr?.managedObjectModel?
             .fetchRequestFromTemplateWithName("RulesInSource",
-              substitutionVariables: [ "SOURCE": ruleSource ]
+              substitutionVariables: [ "SOURCE": ruleSource.objectID ]
             )
           fetchRequest?.sortDescriptors = [ NSSortDescriptor(key: "sourceText", ascending: true) ]
           if let fr = fetchRequest {
@@ -112,31 +111,6 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
 
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
     self.tableView.beginUpdates()
-  }
-
-  func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-    switch type {
-    case .Insert:
-      self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-    case .Delete:
-      self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-    default:
-      return
-    }
-  }
-
-  func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-    switch type {
-    case .Insert:
-      tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-    case .Delete:
-      tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-    case .Update:
-      self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
-    case .Move:
-      tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-      tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-    }
   }
 
   func controllerDidChangeContent(controller: NSFetchedResultsController) {

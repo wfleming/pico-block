@@ -211,6 +211,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cpf-rt-tkp"/>
+        <segue reference="c4p-R0-SxP"/>
     </inferredMetricsTieBreakers>
 </document>

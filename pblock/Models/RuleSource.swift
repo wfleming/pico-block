@@ -42,7 +42,7 @@ class RuleSource: NSManagedObject {
           .responseString { _, response, result in
             dlog("INFO: got remote contents for \(self.name)")
             if !result.isSuccess {
-              dlog("INFO: the response does not indicate success")
+              dlog("INFO: the response for \(self.name) does not indicate success: \(response)")
               return
             }
             // store etag (if present) for future use
@@ -61,6 +61,7 @@ class RuleSource: NSManagedObject {
                 return rule
               })
               self.lastUpdatedAt = NSDate()
+              dlog("rule source \(self.name) now has \(self.rules?.count) parsed rules")
               do {
                 try coreDataCtx.save()
               } catch {
