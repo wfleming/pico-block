@@ -13,13 +13,22 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  private var splitViewDelegate = SplitViewDelegate()
 
   func application(application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
+    didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     UserPrefs.sharedInstance.firstRun {
       DefaultData.setup()
     }
+
+    // setup bits of view that can't be done in UI builder
+    let tabViewController = self.window!.rootViewController as? UITabBarController
+    let splitViewController = tabViewController?.viewControllers?.first as? UISplitViewController
+    let navController = splitViewController?.viewControllers.last as? UINavigationController
+    navController?.topViewController?.navigationItem.leftBarButtonItem = splitViewController?
+      .displayModeButtonItem()
+    splitViewController?.delegate = splitViewDelegate
+
     return true
   }
 

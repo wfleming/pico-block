@@ -27,13 +27,14 @@ class RuleSourcesController: UITableViewController, NSFetchedResultsControllerDe
   // MARK: - Segues
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "showRuleSourceRules" {
+    if "showRuleSourceRules" == segue.identifier {
       if let indexPath = self.tableView.indexPathForSelectedRow {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         let navController = segue.destinationViewController as! UINavigationController
         let controller = navController.topViewController as! RulesController
         controller.ruleSource = object as? RuleSource
-        controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+        controller.navigationItem.leftBarButtonItem = self.splitViewController?
+          .displayModeButtonItem()
         controller.navigationItem.leftItemsSupplementBackButton = true
       }
     }

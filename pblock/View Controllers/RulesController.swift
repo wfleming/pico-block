@@ -16,6 +16,11 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
     didSet {
       _fetchedResultsController = nil
       if let frc = fetchedResultsController {
+        if let rs = ruleSource {
+          self.navigationItem.title = rs.name
+        } else {
+          self.navigationItem.title = "Rules"
+        }
         controllerWillChangeContent(frc)
       }
     }

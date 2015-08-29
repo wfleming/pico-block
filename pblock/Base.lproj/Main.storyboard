@@ -81,12 +81,30 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="tdN-FF-4PC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="5uM-ct-fEc" detailTextLabel="sWk-Kt-Yug" style="IBUITableViewCellStyleSubtitle" id="tdN-FF-4PC">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tdN-FF-4PC" id="QiV-JK-nyS">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5uM-ct-fEc">
+                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sWk-Kt-Yug">
+                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
@@ -101,17 +119,17 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Third Party Filters" id="vR2-46-VjI" userLabel="Third Party Filters"/>
-                    <navigationItem key="navigationItem" id="6tY-Oq-GoS"/>
+                    <navigationItem key="navigationItem" title="Third Party Rules" id="6tY-Oq-GoS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DbI-qH-Aj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="874" y="375"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Third Party Rules Nav Controller-->
         <scene sceneID="nbc-V4-hqp">
             <objects>
-                <navigationController id="ZRi-0Y-wcx" sceneMemberID="viewController">
+                <navigationController id="ZRi-0Y-wcx" userLabel="Third Party Rules Nav Controller" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1IH-ZZ-puS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -157,10 +175,10 @@
             </objects>
             <point key="canvasLocation" x="864" y="1206"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Third Party Rule Sources Nav Controller-->
         <scene sceneID="87b-Sk-cOh">
             <objects>
-                <navigationController id="z1n-lR-Ejh" sceneMemberID="viewController">
+                <navigationController title="Rule Sources" id="z1n-lR-Ejh" userLabel="Third Party Rule Sources Nav Controller" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8WB-b4-eEl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -180,13 +198,11 @@
                 <splitViewController id="ap9-CI-2rD" userLabel="Third Party Rules Tab Split View" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Third Party Filters" id="50U-8Y-J31"/>
                     <connections>
-                        <outlet property="delegate" destination="GQ6-PU-eAI" id="OK4-wU-5t4"/>
                         <segue destination="z1n-lR-Ejh" kind="relationship" relationship="masterViewController" id="y8t-Pg-3y7"/>
                         <segue destination="ZRi-0Y-wcx" kind="relationship" relationship="detailViewController" id="cpf-rt-tkp"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qf7-VM-XkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="GQ6-PU-eAI" customClass="SplitViewDelegate" customModule="pblock" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-764" y="375"/>
         </scene>
@@ -195,6 +211,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="c4p-R0-SxP"/>
+        <segue reference="cpf-rt-tkp"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,6 +12,7 @@ import UIKit
 class SplitViewDelegate: NSObject, NSCoding, UISplitViewControllerDelegate {
 
   // MARK: NSCoding
+
   required convenience init(coder decoder: NSCoder) {
     self.init()
   }
@@ -20,9 +21,11 @@ class SplitViewDelegate: NSObject, NSCoding, UISplitViewControllerDelegate {
   }
 
   // MARK: UISplitViewControllerDelegate
+
   func splitViewController(splitViewController: UISplitViewController,
     collapseSecondaryViewController secondaryViewController:UIViewController,
     ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
+      
     guard let secondaryAsNavController = secondaryViewController as? UINavigationController else {
       return false
     }
