@@ -81,7 +81,7 @@ class ABPRuleParser: NSObject {
     // is this an exception/allow filter?
     if subject.hasPrefix("@@") {
       action = RuleActionType.IgnorePreviousRules;
-      subject = subject.substringFromIndex(advance(subject.startIndex, 2))
+      subject = subject.substringFromIndex(subject.startIndex.advancedBy(2))
     }
 
     // options
@@ -107,7 +107,7 @@ class ABPRuleParser: NSObject {
         addDomains(subject.substringToIndex(pos.startIndex), separator: ",")
         filter = ".*"
         isRegex = true
-        selector = subject.substringFromIndex(advance(pos.startIndex, 2))
+        selector = subject.substringFromIndex(pos.startIndex.advancedBy(2))
         return
       } else if c == "@" {
         // this is an uncommonly used shortcut syntax. maybe support in the future if it
@@ -175,7 +175,7 @@ class ABPRuleParser: NSObject {
 
     for (idx, val) in opts.enumerate() {
       if val.hasPrefix("domains=") {
-        let domains = val.substringFromIndex(advance(val.startIndex, 8))
+        let domains = val.substringFromIndex(val.startIndex.advancedBy(8))
         addDomains(domains, separator: "|")
         opts.removeAtIndex(idx)
         break;
@@ -211,10 +211,10 @@ class ABPRuleParser: NSObject {
       .stringByReplacingOccurrencesOfString("*||", withString: "||")
       .stringByReplacingOccurrencesOfString(".||", withString: "||")
     if hostname.hasPrefix("||") {
-      hostname = "*.\(hostname.substringFromIndex(advance(hostname.startIndex, 2)))"
+      hostname = "*.\(hostname.substringFromIndex(hostname.startIndex.advancedBy(2)))"
     }
     if hostname.hasSuffix("||") {
-      hostname = "\(hostname.substringToIndex(advance(hostname.endIndex, -2))).*"
+      hostname = "\(hostname.substringToIndex(hostname.endIndex.advancedBy(-2))).*"
     }
     return hostname
   }
