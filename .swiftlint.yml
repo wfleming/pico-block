@@ -1,0 +1,2 @@
+disabled_rules:
+  - variable_name  # disabled because of capitalized OptionSetType members
