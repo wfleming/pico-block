@@ -51,6 +51,7 @@
 		BE83B0CF1B5436B90074FDA3 /* RuleOptionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */; };
 		BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */; };
 		BE83B0D31B543B320074FDA3 /* RuleDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D11B543B320074FDA3 /* RuleDomain.swift */; };
+		BE9F0A851B8AAEFD00AB1D2F /* SplitViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleOptionsSpec.swift; sourceTree = "<group>"; };
 		BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RuleDomain+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BE83B0D11B543B320074FDA3 /* RuleDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleDomain.swift; sourceTree = "<group>"; };
+		BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				BE43E5691B4F25FC00C522FF /* Main.storyboard */,
+				BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */,
 				BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */,
 				BE43E56C1B4F25FC00C522FF /* Assets.xcassets */,
 				BE82A2ED1B5057D1007A91AA /* Model.xcdatamodeld */,
@@ -454,7 +457,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = "Will Fleming";
+				ORGANIZATIONNAME = PBlock;
 				TargetAttributes = {
 					BE43E55F1B4F25FB00C522FF = {
 						CreatedOnToolsVersion = 7.0;
@@ -605,6 +608,7 @@
 				BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */,
 				BE82A2FF1B505B5E007A91AA /* RuleSource.swift in Sources */,
 				BE82A3061B5073E7007A91AA /* CoreDataManager.swift in Sources */,
+				BE9F0A851B8AAEFD00AB1D2F /* SplitViewDelegate.swift in Sources */,
 				BE82A3001B505B5E007A91AA /* Rule+CoreDataProperties.swift in Sources */,
 				BE43E5661B4F25FC00C522FF /* RuleSourcesController.swift in Sources */,
 				BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */,

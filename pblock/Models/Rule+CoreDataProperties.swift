@@ -3,7 +3,7 @@
 //  pblock
 //
 //  Created by Will Fleming on 8/22/15.
-//  Copyright © 2015 Will Fleming. All rights reserved.
+//  Copyright © 2015 PBlock. All rights reserved.
 //
 //  Delete this file and regenerate it using "Create NSManagedObject Subclass…"
 //  to keep your implementation up to date with your model.
