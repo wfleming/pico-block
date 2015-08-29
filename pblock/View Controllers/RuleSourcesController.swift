@@ -24,6 +24,21 @@ class RuleSourcesController: UITableViewController, NSFetchedResultsControllerDe
     // Dispose of any resources that can be recreated.
   }
 
+  // MARK: - Segues
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "showRuleSourceRules" {
+      if let indexPath = self.tableView.indexPathForSelectedRow {
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        let navController = segue.destinationViewController as! UINavigationController
+        let controller = navController.topViewController as! RulesController
+        controller.ruleSource = object as? RuleSource
+        controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+        controller.navigationItem.leftItemsSupplementBackButton = true
+      }
+    }
+  }
+
 
   // MARK: - Table View
 
@@ -69,7 +84,7 @@ class RuleSourcesController: UITableViewController, NSFetchedResultsControllerDe
 
   // MARK: - Fetched results controller
 
-  lazy var fetchedResultsController: NSFetchedResultsController = {
+  lazy private var fetchedResultsController: NSFetchedResultsController = {
     var fetchRequest: NSFetchRequest = (self.coreDataMgr?.managedObjectModel?
       .fetchRequestTemplateForName("ThirdPartyRuleSources")?.copy() as! NSFetchRequest)
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="v1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8175.2" systemVersion="15A244d" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="v1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="15A263e" minimumToolsVersion="Xcode 7.0">
     <entity name="Rule" representedClassName="Rule" syncable="YES">
         <attribute name="actionSelector" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionTypeRaw" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
@@ -23,6 +23,7 @@
         <relationship name="rules" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Rule" inverseName="source" inverseEntity="Rule" syncable="YES"/>
     </entity>
     <fetchRequest name="MyRuleSource" entity="RuleSource" predicateString="url == &quot;localhost&quot;"/>
+    <fetchRequest name="RulesInSource" entity="Rule" predicateString="source == $SOURCE"/>
     <fetchRequest name="ThirdPartyRuleSources" entity="RuleSource" predicateString="url != &quot;localhost&quot;"/>
     <elements>
         <element name="Rule" positionX="-297" positionY="-63" width="128" height="195"/>

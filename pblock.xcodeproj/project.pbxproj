@@ -16,6 +16,8 @@
 		BE43E5861B4F25FC00C522FF /* pblockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5851B4F25FC00C522FF /* pblockUITests.swift */; };
 		BE43E59C1B4F262100C522FF /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E59B1B4F262100C522FF /* ActionRequestHandler.swift */; };
 		BE43E5A01B4F262100C522FF /* pblock-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE43E5971B4F262100C522FF /* pblock-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BE4E4DF21B9232DF00AEB7E4 /* RulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E4DF11B9232DF00AEB7E4 /* RulesController.swift */; settings = {ASSET_TAGS = (); }; };
+		BE4E4DF41B923BE500AEB7E4 /* DetailViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E4DF31B923BE500AEB7E4 /* DetailViewControllerProtocol.swift */; settings = {ASSET_TAGS = (); }; };
 		BE4FE90F1B88DC2B0075AD95 /* ABPRuleFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE90E1B88DC2B0075AD95 /* ABPRuleFileParser.swift */; };
 		BE4FE9121B8902040075AD95 /* ABPRuleFileParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE9111B8902040075AD95 /* ABPRuleFileParserSpec.swift */; };
 		BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE9131B890DB30075AD95 /* ParsedRule.swift */; };
@@ -133,6 +135,8 @@
 		BE43E59D1B4F262100C522FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE43E5A51B4F3BA000C522FF /* pblock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = pblock.entitlements; sourceTree = "<group>"; };
 		BE43E5A61B4F3BB400C522FF /* pblock-extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "pblock-extension.entitlements"; sourceTree = "<group>"; };
+		BE4E4DF11B9232DF00AEB7E4 /* RulesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesController.swift; sourceTree = "<group>"; };
+		BE4E4DF31B923BE500AEB7E4 /* DetailViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewControllerProtocol.swift; sourceTree = "<group>"; };
 		BE4FE90E1B88DC2B0075AD95 /* ABPRuleFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABPRuleFileParser.swift; sourceTree = "<group>"; };
 		BE4FE9111B8902040075AD95 /* ABPRuleFileParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABPRuleFileParserSpec.swift; sourceTree = "<group>"; };
 		BE4FE9131B890DB30075AD95 /* ParsedRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsedRule.swift; sourceTree = "<group>"; };
@@ -163,7 +167,7 @@
 		BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleOptionsSpec.swift; sourceTree = "<group>"; };
 		BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RuleDomain+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BE83B0D11B543B320074FDA3 /* RuleDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleDomain.swift; sourceTree = "<group>"; };
-		BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewDelegate.swift; sourceTree = "<group>"; };
+		BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplitViewDelegate.swift; path = "Supporting Files/SplitViewDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +239,7 @@
 				BE43E5631B4F25FC00C522FF /* AppDelegate.swift */,
 				BE4FE9221B891E510075AD95 /* DefaultData.swift */,
 				BE4FE92A1B8953850075AD95 /* UserPrefs.swift */,
+				BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */,
 				BE82A2EC1B5055EC007A91AA /* Supporting Files */,
 				BE82A2CF1B500F6D007A91AA /* Frameworks */,
 				BE43E5711B4F25FC00C522FF /* Info.plist */,
@@ -277,7 +282,9 @@
 		BE4FE9211B891BA50075AD95 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BE4E4DF31B923BE500AEB7E4 /* DetailViewControllerProtocol.swift */,
 				BE43E5651B4F25FC00C522FF /* RuleSourcesController.swift */,
+				BE4E4DF11B9232DF00AEB7E4 /* RulesController.swift */,
 				BE43E5671B4F25FC00C522FF /* SecondViewController.swift */,
 			);
 			path = "View Controllers";
@@ -336,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				BE43E5691B4F25FC00C522FF /* Main.storyboard */,
-				BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */,
 				BE43E56E1B4F25FC00C522FF /* LaunchScreen.storyboard */,
 				BE43E56C1B4F25FC00C522FF /* Assets.xcassets */,
 				BE82A2ED1B5057D1007A91AA /* Model.xcdatamodeld */,
@@ -606,8 +612,10 @@
 				BE4FE9181B8912390075AD95 /* RuleFileParserProtocol.swift in Sources */,
 				BE82A2E31B504D3B007A91AA /* ABPRuleParser.swift in Sources */,
 				BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */,
+				BE4E4DF41B923BE500AEB7E4 /* DetailViewControllerProtocol.swift in Sources */,
 				BE82A2FF1B505B5E007A91AA /* RuleSource.swift in Sources */,
 				BE82A3061B5073E7007A91AA /* CoreDataManager.swift in Sources */,
+				BE4E4DF21B9232DF00AEB7E4 /* RulesController.swift in Sources */,
 				BE9F0A851B8AAEFD00AB1D2F /* SplitViewDelegate.swift in Sources */,
 				BE82A3001B505B5E007A91AA /* Rule+CoreDataProperties.swift in Sources */,
 				BE43E5661B4F25FC00C522FF /* RuleSourcesController.swift in Sources */,
