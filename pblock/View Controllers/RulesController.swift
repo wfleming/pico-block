@@ -15,7 +15,7 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
   var ruleSource: RuleSource? {
     didSet {
       _fetchedResultsController = nil
-      if let frc = fetchedResultsController {
+      if let _ = fetchedResultsController {
         if let rs = ruleSource {
           self.navigationItem.title = rs.name
         } else {
