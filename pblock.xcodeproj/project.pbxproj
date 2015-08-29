@@ -235,10 +235,8 @@
 				BE4FE9211B891BA50075AD95 /* View Controllers */,
 				BE82A2F11B505AEA007A91AA /* Models */,
 				BE82A2E11B504CF4007A91AA /* RuleParser */,
-				BE82A3051B5073E7007A91AA /* CoreDataManager.swift */,
+				BE4E4DF51B92554B00AEB7E4 /* Services */,
 				BE43E5631B4F25FC00C522FF /* AppDelegate.swift */,
-				BE4FE9221B891E510075AD95 /* DefaultData.swift */,
-				BE4FE92A1B8953850075AD95 /* UserPrefs.swift */,
 				BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */,
 				BE82A2EC1B5055EC007A91AA /* Supporting Files */,
 				BE82A2CF1B500F6D007A91AA /* Frameworks */,
@@ -277,6 +275,16 @@
 				BE43E59D1B4F262100C522FF /* Info.plist */,
 			);
 			path = "pblock-extension";
+			sourceTree = "<group>";
+		};
+		BE4E4DF51B92554B00AEB7E4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BE82A3051B5073E7007A91AA /* CoreDataManager.swift */,
+				BE4FE9221B891E510075AD95 /* DefaultData.swift */,
+				BE4FE92A1B8953850075AD95 /* UserPrefs.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		BE4FE9211B891BA50075AD95 /* View Controllers */ = {
