@@ -86,7 +86,7 @@ class ABPRuleParserSpec : QuickSpec {
       }
 
       it("parses advanced options") {
-        let rule = try! ABPRuleParser("bad.js$third-party,domains=foo.bar|~bah.com,script").parsedRule()
+        let rule = try! ABPRuleParser("bad.js$third-party,domain=foo.bar|~bah.com,script").parsedRule()
         expect(rule?.actionType).to(equal(RuleActionType.Block))
         expect(rule?.triggerUrlFilter).to(equal("bad\\.js"))
         expect(rule?.triggerLoadTypes).to(equal(RuleLoadTypeOptions.ThirdParty))

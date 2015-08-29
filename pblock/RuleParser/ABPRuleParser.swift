@@ -92,28 +92,30 @@ class ABPRuleParser: NSObject {
 
     // element hiding filter?
     if let pos = subject.rangeOfString("#") {
-      let c = subject.substringWithRange(Range(start: pos.startIndex.successor(), end:pos.endIndex.successor()))
-      if c == "#" {
-        if RuleActionType.IgnorePreviousRules == action {
-          // these types of rules did not work in my testing
+      if pos.endIndex != subject.endIndex {
+        let c = subject.substringWithRange(Range(start: pos.startIndex.successor(), end:pos.endIndex.successor()))
+        if c == "#" {
+          if RuleActionType.IgnorePreviousRules == action {
+            // these types of rules did not work in my testing
+            unsupported = true
+            return
+          }
+
+          action = RuleActionType.CssDisplayNone
+          // This is kind of odd, but I think it's to spec: ABP docs indicate that the predecessing
+          // part of the rule here is domains, not URL filters.
+          // https://adblockplus.org/en/filters#elemhide_domains
+          addDomains(subject.substringToIndex(pos.startIndex), separator: ",")
+          filter = ".*"
+          isRegex = true
+          selector = subject.substringFromIndex(pos.startIndex.advancedBy(2))
+          return
+        } else if c == "@" {
+          // this is an uncommonly used shortcut syntax. maybe support in the future if it
+          // can be supported by content blocking
           unsupported = true
           return
         }
-
-        action = RuleActionType.CssDisplayNone
-        // This is kind of odd, but I think it's to spec: ABP docs indicate that the predecessing
-        // part of the rule here is domains, not URL filters.
-        // https://adblockplus.org/en/filters#elemhide_domains
-        addDomains(subject.substringToIndex(pos.startIndex), separator: ",")
-        filter = ".*"
-        isRegex = true
-        selector = subject.substringFromIndex(pos.startIndex.advancedBy(2))
-        return
-      } else if c == "@" {
-        // this is an uncommonly used shortcut syntax. maybe support in the future if it
-        // can be supported by content blocking
-        unsupported = true
-        return
       }
     }
 
@@ -174,7 +176,7 @@ class ABPRuleParser: NSObject {
     }
 
     for (idx, val) in opts.enumerate() {
-      if val.hasPrefix("domains=") {
+      if val.hasPrefix("domain=") {
         let domains = val.substringFromIndex(val.startIndex.advancedBy(8))
         addDomains(domains, separator: "|")
         opts.removeAtIndex(idx)
