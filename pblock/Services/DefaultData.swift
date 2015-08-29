@@ -13,7 +13,7 @@ class DefaultData  {
   struct DefaultRuleSourceDescriptor {
     var name: String,
         url: String,
-        parserType: RuleFileParserProtocol.Type?
+        parserType: String? //RuleFileParserProtocol.Type? (TODO: make this work)
   }
 
   static let uBlockUrl = "https://raw.githubusercontent.com/chrisaljoudi/uBlock/master/assets/ublock"
@@ -22,37 +22,37 @@ class DefaultData  {
     DefaultRuleSourceDescriptor(
       name: "uBlock filters",
       url: "\(uBlockUrl)/filters.txt",
-      parserType: ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
     ),
     DefaultRuleSourceDescriptor(
       name: "uBlock privacy filters",
       url: "\(uBlockUrl)/privacy.txt",
-      parserType: ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
     ),
     DefaultRuleSourceDescriptor(
       name: "AdBlockPlus EasyList",
       url: "https://easylist-downloads.adblockplus.org/easylist.txt",
-      parserType: ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
     ),
     DefaultRuleSourceDescriptor(
       name: "AdBlockPlus EasyPrivacy",
       url: "https://easylist-downloads.adblockplus.org/easyprivacy.txt",
-      parserType: ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
     ),
     DefaultRuleSourceDescriptor(
       name: "Peter Lowe’s Ad server list‎",
       url: "http://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
-      parserType: HostFileParser.self
+      parserType: "HostFileParser" //HostFileParser.self
     ),
     DefaultRuleSourceDescriptor(
       name: "Malware Domain List‎",
       url: "http://www.malwaredomainlist.com/hostslist/hosts.txt",
-      parserType: HostFileParser.self
+      parserType: "HostFileParser" //HostFileParser.self
     ),
     DefaultRuleSourceDescriptor(
       name: "Malware Domains‎",
       url: "http://mirror1.malwaredomains.com/files/justdomains",
-      parserType: HostFileParser.self
+      parserType: "HostFileParser" //HostFileParser.self
     ),
     DefaultRuleSourceDescriptor(
       name: "My Filters",
@@ -61,15 +61,17 @@ class DefaultData  {
     )
   ]
 
-  static func setup() {
+  class func setup() {
     let coreDataMgr = CoreDataManager.sharedInstance
 
     defaultRuleSources.forEach { (DefaultRuleSourceDescriptor rsd) -> () in
       let ruleSource = RuleSource(inContext: coreDataMgr.managedObjectContext!)
       ruleSource.name = rsd.name
       ruleSource.url = rsd.url
-      if let type = rsd.parserType {
-        ruleSource.parserType = _stdlib_getDemangledTypeName(type)
+      if let parserClass = rsd.parserType {
+//        let pieces = _stdlib_getDemangledTypeName(parserClass).componentsSeparatedByString(".")
+//        ruleSource.parserType = pieces[pieces.count - 2]
+        ruleSource.parserType = parserClass
       }
     }
 

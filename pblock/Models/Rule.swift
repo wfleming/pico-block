@@ -12,6 +12,33 @@ import CoreData
 @objc(Rule)
 class Rule: NSManagedObject {
 
+  convenience init(parsedRule: ParsedRule) {
+    let ctx = CoreDataManager.sharedInstance.managedObjectContext!
+    self.init(inContext: ctx)
+    sourceText = parsedRule.sourceText
+    actionType = parsedRule.actionType
+    actionSelector = parsedRule.actionSelector
+    triggerUrlFilter = parsedRule.triggerUrlFilter
+    triggerResourceTypes = parsedRule.triggerResourceTypes
+    triggerLoadTypes = parsedRule.triggerLoadTypes
+
+    if let ifDomains = parsedRule.triggerIfDomain {
+      triggerIfDomain = NSOrderedSet(array: ifDomains.map({ (domainStr) -> RuleDomain in
+        let d = RuleDomain(inContext: ctx)
+        d.domain = domainStr
+        return d
+      }))
+    }
+
+    if let unlessDomains = parsedRule.triggerUnlessDomain {
+      triggerUnlessDomain = NSOrderedSet(array: unlessDomains.map({ (domainStr) -> RuleDomain in
+        let d = RuleDomain(inContext: ctx)
+        d.domain = domainStr
+        return d
+      }))
+    }
+  }
+
   var actionType: RuleActionType {
     get {
       if nil == actionTypeRaw {

@@ -59,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationDidBecomeActive(application: UIApplication) {
     logToGroupLogFile("app.active")
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+      RuleSource.refreshRemoteRuleSources()
+    }
   }
 
   func applicationWillTerminate(application: UIApplication) {
