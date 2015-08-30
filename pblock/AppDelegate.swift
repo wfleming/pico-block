@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ReactiveCocoa
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -57,11 +58,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
   }
 
+  var racsub: RACSubscriber?
+
   func applicationDidBecomeActive(application: UIApplication) {
     if !isTest() {
       logToGroupLogFile("app.active")
       Async.background {
-        RuleSource.refreshRemoteRuleSources()
+        let signal = RuleUpdater.forAllEnabledSources().doUpdate()
+        signal.toSignalProducer().on(completed: {
+          ContentRulesWriter().writeRules()
+        }).start()
       }
     }
   }

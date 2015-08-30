@@ -34,6 +34,7 @@
 		BE673C1D1B936D2D0026D8C4 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C181B936D180026D8C4 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE673C1E1B936D2D0026D8C4 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C191B936D180026D8C4 /* Result.framework */; };
 		BE673C1F1B936D2D0026D8C4 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C191B936D180026D8C4 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE673C211B9377D60026D8C4 /* RuleUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C201B9377D60026D8C4 /* RuleUpdater.swift */; settings = {ASSET_TAGS = (); }; };
 		BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2CD1B500F62007A91AA /* CoreData.framework */; };
 		BE82A2D51B5011DA007A91AA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D31B5011DA007A91AA /* Nimble.framework */; };
 		BE82A2D61B5011DA007A91AA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D41B5011DA007A91AA /* Quick.framework */; };
@@ -161,6 +162,7 @@
 		BE4FE92A1B8953850075AD95 /* UserPrefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPrefs.swift; sourceTree = "<group>"; };
 		BE673C181B936D180026D8C4 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = SOURCE_ROOT; };
 		BE673C191B936D180026D8C4 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = SOURCE_ROOT; };
+		BE673C201B9377D60026D8C4 /* RuleUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleUpdater.swift; sourceTree = "<group>"; };
 		BE82A2CD1B500F62007A91AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BE82A2D01B500F91007A91AA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		BE82A2D31B5011DA007A91AA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				BE4FE9221B891E510075AD95 /* DefaultData.swift */,
 				BE4FE92A1B8953850075AD95 /* UserPrefs.swift */,
 				BE94FC8A1B92846A006728D5 /* ContentRulesWriter.swift */,
+				BE673C201B9377D60026D8C4 /* RuleUpdater.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE82A2EA1B5052DA007A91AA /* DebugLog.swift in Sources */,
+				BE673C211B9377D60026D8C4 /* RuleUpdater.swift in Sources */,
 				BE83B0D31B543B320074FDA3 /* RuleDomain.swift in Sources */,
 				BE83B0CD1B5432620074FDA3 /* RuleOptions.swift in Sources */,
 				BE4FE9231B891E510075AD95 /* DefaultData.swift in Sources */,
