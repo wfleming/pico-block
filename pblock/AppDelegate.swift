@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import ReactiveCocoa
+import SafariServices
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -67,7 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let signal = RuleUpdater.forAllEnabledSources().doUpdate().take(1)
         signal.toSignalProducer().on(next: {
           if let count = $0 as? Int where count > 0 {
-            ContentRulesWriter().writeRules()
+            ContentRulesWriter().writeRulesSignal().toSignalProducer().on(completed: {
+              self.refreshExtension()
+            }).start()
           }
         }).start()
       }
@@ -78,5 +81,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /* Called when the application is about to terminate. Save data if appropriate.
      * See also applicationDidEnterBackground:.
      */
+  }
+
+  func refreshExtension() {
+    logToGroupLogFile("app.request-extension-refresh")
+    SFContentBlockerManager.reloadContentBlockerWithIdentifier(
+      "com.wfleming.pblock.pblock-extension") { (error: NSError?) -> Void in
+      if let err = error {
+        dlog("extension rules failed to load: \(err)")
+      } else {
+        dlog("successfully reloaded extension rules")
+      }
+    }
   }
 }

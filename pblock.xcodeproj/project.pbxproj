@@ -37,6 +37,7 @@
 		BE673C211B9377D60026D8C4 /* RuleUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C201B9377D60026D8C4 /* RuleUpdater.swift */; settings = {ASSET_TAGS = (); }; };
 		BE673C231B93B3460026D8C4 /* ContentRuleJSONFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */; settings = {ASSET_TAGS = (); }; };
 		BE673C251B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */; settings = {ASSET_TAGS = (); }; };
+		BE673C271B93C73B0026D8C4 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C261B93C73B0026D8C4 /* SafariServices.framework */; };
 		BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2CD1B500F62007A91AA /* CoreData.framework */; };
 		BE82A2D51B5011DA007A91AA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D31B5011DA007A91AA /* Nimble.framework */; };
 		BE82A2D61B5011DA007A91AA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D41B5011DA007A91AA /* Quick.framework */; };
@@ -167,6 +168,7 @@
 		BE673C201B9377D60026D8C4 /* RuleUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleUpdater.swift; sourceTree = "<group>"; };
 		BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRuleJSONFileParser.swift; sourceTree = "<group>"; };
 		BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRuleJSONFileParserSpec.swift; sourceTree = "<group>"; };
+		BE673C261B93C73B0026D8C4 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		BE82A2CD1B500F62007A91AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BE82A2D01B500F91007A91AA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		BE82A2D31B5011DA007A91AA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE673C271B93C73B0026D8C4 /* SafariServices.framework in Frameworks */,
 				BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */,
 				BE82A2E01B5019AE007A91AA /* Alamofire.framework in Frameworks */,
 				BE673C1E1B936D2D0026D8C4 /* Result.framework in Frameworks */,
@@ -328,6 +331,7 @@
 		BE82A2CF1B500F6D007A91AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE673C261B93C73B0026D8C4 /* SafariServices.framework */,
 				BE673C181B936D180026D8C4 /* ReactiveCocoa.framework */,
 				BE673C191B936D180026D8C4 /* Result.framework */,
 				BE82A2D01B500F91007A91AA /* Alamofire.framework */,

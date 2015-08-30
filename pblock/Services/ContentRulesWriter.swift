@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import ReactiveCocoa
 
 // for writing all active rules in the DB into our content blocking json
 class ContentRulesWriter {
@@ -15,9 +16,20 @@ class ContentRulesWriter {
   private var ctx: NSManagedObjectContext
   private let pageSize = 50
   private let filePathURL = rulesJSONPath()
+  private var recordsWritten = 0
 
   required init() {
     ctx = mgr.childManagedObjectContext()!
+  }
+
+  func writeRulesSignal() -> RACSignal {
+    return RACSignal.createSignal { (sub: RACSubscriber!) -> RACDisposable! in
+      self.writeRules()
+      sub.sendNext(self.recordsWritten)
+      sub.sendCompleted()
+
+      return RACDisposable()
+    }
   }
 
   func writeRules() {
@@ -35,8 +47,7 @@ class ContentRulesWriter {
 
       fh.writeData("[".dataUsingEncoding(NSUTF8StringEncoding)!)
 
-      var recordsWritten = 0,
-          currentPage = 0,
+      var currentPage = 0,
           currentRules = self.enabledRules(currentPage)
       while currentRules.count > 0 {
         currentRules.forEach {
