@@ -21,7 +21,15 @@ class RuleUpdater {
     let fetchRequest = mgr.managedObjectModel!.fetchRequestTemplateForName("ThirdPartyRuleSources")
     do {
       let sources = try mgr.managedObjectContext!.executeFetchRequest(fetchRequest!)
-      let enabledSources = (sources as! Array<RuleSource>).filter { $0.enabled!.boolValue }
+      let enabledSources = (sources as! Array<RuleSource>).filter {
+        if let b = $0.enabled?.boolValue {
+          return b
+        } else {
+          // consider record with enabled => nil to be disabled: this shouldn't happen, though?
+          dlog("RuleUpdater: source \($0.name) had unexpected nil enabled")
+          return false
+        }
+      }
       dlog("RuleUpdater.forAllEnabledSources: \(enabledSources.count) sources")
       return self.init(sources: enabledSources)
     } catch {
@@ -34,11 +42,24 @@ class RuleUpdater {
     self.sources = sources
   }
 
+  // constructs a signal that encapsulates all update logic: this signal will emit an integer
+  // which is the number of rule soures that actually fetched & parsed new rules.
   func doUpdate() -> RACSignal {
-    dlog("RuleUpdater.doUpdate: constructing signal")
-    let signal = RACSignal.concat(self.sources.map { updateSource($0) })
-    //    signal.startWith(nil)
-    return signal
+    return RACSignal.zip(self.sources.map { updateSource($0) }).scanWithStart(0,
+      reduce: { (memo: AnyObject!, next: AnyObject!) -> AnyObject! in
+        let memoInt = memo as! Int
+        if let nextTuple = next as? RACTuple {
+          return nextTuple.allObjects().reduce(0,
+            combine: { (sum: Int, updated: AnyObject) -> Int in
+              if let updatedBool = updated as? Bool where updatedBool {
+               return sum + 1
+              } else {
+                return sum
+              }
+            })
+        }
+        return memoInt
+      })
   }
 
   // construct a signal for a source that emits whether the rule needs updating
@@ -87,14 +108,15 @@ class RuleUpdater {
     var urlFetch: Request?
     return RACSignal.createSignal({ (sub: RACSubscriber!) -> RACDisposable! in
       self.sourceNeedsUpdate(source).subscribeNext({ (needsUpdateObj: AnyObject!) -> Void in
-        let needsUpdate = needsUpdateObj as! Bool
-        if needsUpdate {
+        if let needsUpdate = needsUpdateObj as? Bool where needsUpdate {
           if let url = source.url where nil == url.rangeOfString("localhost") {
             urlFetch = self.reqSourceContents(source, sub)
           } else {
+            sub.sendNext(false)
             sub.sendCompleted()
           }
         } else {
+          sub.sendNext(false)
           sub.sendCompleted()
         }
       })
@@ -111,6 +133,7 @@ class RuleUpdater {
         dlog("RuleUpdater: got response for contents of \(source.name)")
         if !result.isSuccess {
           dlog("RuleUpdater: the response for \(source.name) does not indicate success: \(response)")
+          subscriber.sendNext(false)
           subscriber.sendCompleted()
           return
         }
@@ -125,6 +148,7 @@ class RuleUpdater {
 
   func parseNewRules(source: RuleSource, _ contents: String, _ subscriber: RACSubscriber) {
     defer {
+      subscriber.sendNext(true)
       subscriber.sendCompleted()
     }
     let coreDataCtx = CoreDataManager.sharedInstance.managedObjectContext!
