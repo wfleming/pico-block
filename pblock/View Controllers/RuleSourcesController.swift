@@ -10,13 +10,8 @@ import UIKit
 import CoreData
 
 class RuleSourcesController: UITableViewController, NSFetchedResultsControllerDelegate {
-
-  private var coreDataMgr: CoreDataManager? = nil
-
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    coreDataMgr = CoreDataManager.sharedInstance
   }
 
 
@@ -82,12 +77,12 @@ class RuleSourcesController: UITableViewController, NSFetchedResultsControllerDe
   // MARK: - Fetched results controller
 
   lazy private var fetchedResultsController: NSFetchedResultsController = {
-    var fetchRequest: NSFetchRequest = (self.coreDataMgr?.managedObjectModel?
+    var fetchRequest: NSFetchRequest = (CoreDataManager.sharedInstance.managedObjectModel?
       .fetchRequestTemplateForName("ThirdPartyRuleSources")?.copy() as! NSFetchRequest)
     fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     let controller = NSFetchedResultsController(
       fetchRequest: fetchRequest,
-      managedObjectContext: self.coreDataMgr!.managedObjectContext!,
+      managedObjectContext: CoreDataManager.sharedInstance.managedObjectContext!,
       sectionNameKeyPath: nil,
       cacheName: nil
     )

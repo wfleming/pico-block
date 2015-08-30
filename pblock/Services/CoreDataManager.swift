@@ -14,62 +14,76 @@ class CoreDataManager: NSObject {
   static let sharedInstance = CoreDataManager()
 
   lazy var managedObjectModel: NSManagedObjectModel? = {
-    let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension:"momd")
-    if  nil == modelURL {
-      return nil
+    if nil == self._memoModel {
+      let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension:"momd")
+      if  nil == modelURL {
+        return nil
+      }
+      self._memoModel = NSManagedObjectModel(contentsOfURL: modelURL!)
     }
-    return NSManagedObjectModel(contentsOfURL: modelURL!)
+    return self._memoModel
   }()
+  private var _memoModel: NSManagedObjectModel?
 
   lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-    let storeURL = self.appDocumentsDir()?.URLByAppendingPathComponent("pblock.CDBStore")
-    let model = self.managedObjectModel
+    if nil == self._memoStore {
+      let storeURL = self.appDocumentsDir()?.URLByAppendingPathComponent("pblock.CDBStore")
+      let model = self.managedObjectModel
 
-    if nil == model || nil == storeURL {
-      return nil
+      if nil == model || nil == storeURL {
+        return nil
+      }
+
+      let fm = NSFileManager.defaultManager()
+
+      self._memoStore = NSPersistentStoreCoordinator(managedObjectModel: model!)
+      let opts = [
+        NSMigratePersistentStoresAutomaticallyOption: true,
+        NSInferMappingModelAutomaticallyOption: true
+      ]
+      do {
+        try self._memoStore?.addPersistentStoreWithType(NSSQLiteStoreType,
+          configuration: nil, URL: storeURL, options: opts
+        )
+      } catch {
+        dlog("error setting up persistent store: \(error)")
+        exit(1) // exit immediately: things are bad
+      }
     }
 
-    let fm = NSFileManager.defaultManager()
-
-    var coordinator = NSPersistentStoreCoordinator(managedObjectModel: model!)
-    let opts = [
-      NSMigratePersistentStoresAutomaticallyOption: true,
-      NSInferMappingModelAutomaticallyOption: true
-    ]
-    do {
-      try coordinator.addPersistentStoreWithType(NSSQLiteStoreType,
-        configuration: nil, URL: storeURL, options: opts
-      )
-    } catch {
-      dlog("error setting up persistent store: \(error)")
-      exit(1) // exit immediately: things are bad
-    }
-
-    return coordinator
+    return self._memoStore
   }()
+  private var _memoStore: NSPersistentStoreCoordinator?
 
   lazy var managedObjectContext: NSManagedObjectContext? = {
     /* Returns the managed object context for the application (which is already bound to the
      * persistent store coordinator for the application.) This property is optional since there are
      * legitimate error conditions that could cause the creation of the context to fail.
      */
-    return self.buildManagedObjectContext()
-  }()
+    if nil == self._memoCtx {
+      let coordinator = self.persistentStoreCoordinator
+      if coordinator == nil {
+        return nil
+      }
 
-  func buildManagedObjectContext() -> NSManagedObjectContext? {
-    let coordinator = self.persistentStoreCoordinator
-    if coordinator == nil {
-      return nil
+      self._memoCtx = NSManagedObjectContext(
+        concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType
+      )
+      self._memoCtx?.persistentStoreCoordinator = coordinator
     }
+    return self._memoCtx
+  }()
+  private var _memoCtx: NSManagedObjectContext?
 
+  func childManagedObjectContext() -> NSManagedObjectContext? {
     let ctx = NSManagedObjectContext(
       concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType
     )
-    ctx.persistentStoreCoordinator = coordinator
+    ctx.parentContext = managedObjectContext
     return ctx
   }
 
-  func appDocumentsDir() -> NSURL? {
+  private func appDocumentsDir() -> NSURL? {
     return NSFileManager.defaultManager().URLsForDirectory(
       NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask
     ).last!

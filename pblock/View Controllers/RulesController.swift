@@ -11,7 +11,6 @@ import CoreData
 import UIKit
 
 class RulesController: UITableViewController, NSFetchedResultsControllerDelegate, DetailViewController {
-  private var coreDataMgr: CoreDataManager?
   var ruleSource: RuleSource? {
     didSet {
       _fetchedResultsController = nil
@@ -32,8 +31,6 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    coreDataMgr = CoreDataManager.sharedInstance
   }
 
 
@@ -69,16 +66,16 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
     get {
       if nil == _fetchedResultsController {
         if let ruleSource = ruleSource {
-          coreDataMgr = CoreDataManager.sharedInstance //WTF? this gets set, then is nil
-          let fetchRequest: NSFetchRequest? = coreDataMgr?.managedObjectModel?
+          let fetchRequest: NSFetchRequest? = CoreDataManager.sharedInstance.managedObjectModel?
             .fetchRequestFromTemplateWithName("RulesInSource",
               substitutionVariables: [ "SOURCE": ruleSource.objectID ]
             )
           fetchRequest?.sortDescriptors = [ NSSortDescriptor(key: "sourceText", ascending: true) ]
+          fetchRequest?.shouldRefreshRefetchedObjects = true
           if let fr = fetchRequest {
             _fetchedResultsController = NSFetchedResultsController(
               fetchRequest: fr,
-              managedObjectContext: self.coreDataMgr!.managedObjectContext!,
+              managedObjectContext: CoreDataManager.sharedInstance.managedObjectContext!,
               sectionNameKeyPath: nil,
               cacheName: nil
             )
@@ -86,6 +83,7 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
 
             do {
               try _fetchedResultsController?.performFetch()
+              dlog("rules fetched: \(_fetchedResultsController?.fetchedObjects?.count)")
             } catch {
               dlog("Failed fetch \(error)")
               abort() // crash!

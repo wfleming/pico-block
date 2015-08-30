@@ -17,7 +17,7 @@ class ContentRulesWriter {
   private let filePathURL = rulesJSONPath()
 
   required init() {
-    ctx = mgr.buildManagedObjectContext()!
+    ctx = mgr.childManagedObjectContext()!
   }
 
   func writeRules() {

@@ -20,13 +20,16 @@ class RuleUpdater {
     let mgr = CoreDataManager.sharedInstance
     let fetchRequest = mgr.managedObjectModel!.fetchRequestTemplateForName("ThirdPartyRuleSources")
     do {
-      let sources = try mgr.managedObjectContext!.executeFetchRequest(fetchRequest!)
+      let ctx = mgr.childManagedObjectContext()!
+      let sources = try ctx.executeFetchRequest(fetchRequest!)
       let enabledSources = (sources as! Array<RuleSource>).filter {
         if let b = $0.enabled?.boolValue {
           return b
         } else {
+          // NOTE: I don't think this is happening anymore (using a child context fixed it):
+          // going to leave this logging for a while in case it reoccurs.
           // consider record with enabled => nil to be disabled: this shouldn't happen, though?
-          dlog("source \($0.name) had unexpected nil enabled")
+          dlog("source \($0.name) had unexpected nil enabled  \($0)")
           return false
         }
       }
@@ -151,7 +154,7 @@ class RuleUpdater {
       subscriber.sendNext(true)
       subscriber.sendCompleted()
     }
-    let coreDataCtx = CoreDataManager.sharedInstance.managedObjectContext!
+    let coreDataCtx = CoreDataManager.sharedInstance.childManagedObjectContext()!
     let parserClass = source.parserClass()!
     let parser = parserClass.init(fileSource: contents)
     // destroy the old rules on this source

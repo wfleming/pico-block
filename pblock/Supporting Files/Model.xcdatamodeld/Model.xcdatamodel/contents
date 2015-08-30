@@ -11,6 +11,12 @@
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="RuleSource" inverseName="rules" inverseEntity="RuleSource" syncable="YES"/>
         <relationship name="triggerIfDomain" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RuleDomain" syncable="YES"/>
         <relationship name="triggerUnlessDomain" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RuleDomain" syncable="YES"/>
+        <compoundIndexes>
+            <compoundIndex>
+                <index value="unsupported"/>
+                <index value="actionTypeRaw"/>
+            </compoundIndex>
+        </compoundIndexes>
     </entity>
     <entity name="RuleDomain" representedClassName="RuleDomain" syncable="YES">
         <attribute name="domain" attributeType="String" syncable="YES"/>
@@ -23,6 +29,11 @@
         <attribute name="parserType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" attributeType="String" syncable="YES"/>
         <relationship name="rules" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Rule" inverseName="source" inverseEntity="Rule" syncable="YES"/>
+        <compoundIndexes>
+            <compoundIndex>
+                <index value="enabled"/>
+            </compoundIndex>
+        </compoundIndexes>
     </entity>
     <fetchRequest name="EnabledRules" entity="Rule" predicateString="source.enabled == 1"/>
     <fetchRequest name="MyRuleSource" entity="RuleSource" predicateString="url == &quot;localhost&quot;"/>
