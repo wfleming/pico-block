@@ -21,6 +21,7 @@ class ContentRulesWriter {
     let fm = NSFileManager.defaultManager()
 
     do {
+      dlog("writing rules to \(filePathURL)")
       "".dataUsingEncoding(NSUTF8StringEncoding)?.writeToURL(filePathURL, atomically: true)
       let fh = try NSFileHandle(forWritingToURL: filePathURL)
       defer {

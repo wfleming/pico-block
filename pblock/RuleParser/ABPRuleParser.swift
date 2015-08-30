@@ -57,18 +57,11 @@ class ABPRuleParser: NSObject {
     if (ruleText.hasPrefix("#") && !ruleText.hasPrefix("##")) || ruleText.hasPrefix("!") {
       throw ABPRuleParserError("This is a comment line: you shouldn't try to parse these")
     }
+    if 0 == ruleText.characters.count {
+      throw ABPRuleParserError("Empty lines aren't rules")
+    }
 
     doParse()
-
-    //DEBUG
-    // I'm seeing some bad rules, but aren't sure where they came from
-    if let f = filter where !unsupported {
-      if (".*" == f && action == RuleActionType.Block) || f.hasPrefix("|") {
-        dlog("this rule got parsed badly: \(ruleText)")
-        abort()
-      }
-    }
-    //END DEBUG
 
     return buildParsedRule()
   }
@@ -237,6 +230,13 @@ class ABPRuleParser: NSObject {
     }
     if hostname.hasSuffix("||") {
       hostname = "\(hostname.substringToIndex(hostname.endIndex.advancedBy(-2))).*"
+    }
+    // the "|" "exact" matchers can fairly safely just be dropped
+    if hostname.hasPrefix("|") {
+      hostname = hostname.substringFromIndex(hostname.startIndex.successor())
+    }
+    if hostname.hasSuffix("|") {
+      hostname = hostname.substringToIndex(hostname.endIndex.predecessor())
     }
     return hostname
   }

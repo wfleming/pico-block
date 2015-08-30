@@ -139,14 +139,19 @@ class ABPRuleParserSpec : QuickSpec {
           sourceText: "##.foo", actionSelector: ".foo",
           actionType: RuleActionType.CssDisplayNone, triggerUrlFilter: ".*",
           triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.None,
-          triggerIfDomain: nil, triggerUnlessDomain: nil)
+          triggerIfDomain: nil, triggerUnlessDomain: nil),
+        "|http://r.i.ua^$third-party": ParsedRule(
+          sourceText: "|http://r.i.ua^$third-party", actionSelector: nil,
+          actionType: RuleActionType.Block, triggerUrlFilter: "http://r\\.i\\.ua[^a-zA-z0-9_\\.\\-%]",
+          triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.ThirdParty,
+          triggerIfDomain: nil, triggerUnlessDomain: nil),
       ]
       func eqRule(ruleText: String, _ expected: ParsedRule) -> MatcherFunc<ParsedRule> {
         return MatcherFunc<ParsedRule> { actualExpression, failureMsg in
           let actual = try! actualExpression.evaluate() as ParsedRule!
           failureMsg.postfixMessage = "source text \"\(ruleText)\""
           failureMsg.actualValue = ": actual | expected, " +
-            "source: \(actual.actionType) | \(expected.actionType), " +
+            "action: \(actual.actionType) | \(expected.actionType), " +
             "selector: \(actual.actionSelector) | \(expected.actionSelector), " +
             "url-filter: \(actual.triggerUrlFilter) | \(expected.triggerUrlFilter), " +
             "resource-types: \(actual.triggerResourceTypes) | \(expected.triggerResourceTypes), " +

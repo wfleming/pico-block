@@ -31,7 +31,13 @@ class ABPRuleFileParser: RuleFileParserProtocol {
       return r
     }
 
-    let isRule = { (line: String) -> Bool in !(line.hasPrefix("#") || line.hasPrefix("!")) }
+    let strip = { (line: String) -> String in
+      line.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    let isComment = { (line: String) -> Bool in
+      (line.hasPrefix("#") && !line.hasPrefix("##")) || line.hasPrefix("!")
+    }
+    let isRule = { (line: String) -> Bool in !isComment(line) && "" != line }
 
     let ruleFromLine = { (line: String) -> ParsedRule? in
       do {
@@ -46,7 +52,7 @@ class ABPRuleFileParser: RuleFileParserProtocol {
 
     let unwrapRule = { (rule: ParsedRule?) -> ParsedRule in rule! }
 
-    rules = lines.filter(isRule).map(ruleFromLine).filter(isNotNil).map(unwrapRule)
+    rules = lines.map(strip).filter(isRule).map(ruleFromLine).filter(isNotNil).map(unwrapRule)
     return rules!
   }
 }
