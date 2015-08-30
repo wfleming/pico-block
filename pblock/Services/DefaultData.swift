@@ -39,21 +39,22 @@ class DefaultData  {
       url: "https://easylist-downloads.adblockplus.org/easyprivacy.txt",
       parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
     ),
-    DefaultRuleSourceDescriptor(
-      name: "Peter Lowe’s Ad server list‎",
-      url: "http://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
-      parserType: "HostFileParser" //HostFileParser.self
-    ),
-    DefaultRuleSourceDescriptor(
-      name: "Malware Domain List‎",
-      url: "http://www.malwaredomainlist.com/hostslist/hosts.txt",
-      parserType: "HostFileParser" //HostFileParser.self
-    ),
-    DefaultRuleSourceDescriptor(
-      name: "Malware Domains‎",
-      url: "http://mirror1.malwaredomains.com/files/justdomains",
-      parserType: "HostFileParser" //HostFileParser.self
-    ),
+// these aren't currently available over HTTPS: could set up https mirrors?
+//    DefaultRuleSourceDescriptor(
+//      name: "Peter Lowe’s Ad server list‎",
+//      url: "http://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
+//      parserType: "HostFileParser" //HostFileParser.self
+//    ),
+//    DefaultRuleSourceDescriptor(
+//      name: "Malware Domain List‎",
+//      url: "http://www.malwaredomainlist.com/hostslist/hosts.txt",
+//      parserType: "HostFileParser" //HostFileParser.self
+//    ),
+//    DefaultRuleSourceDescriptor(
+//      name: "Malware Domains‎",
+//      url: "http://mirror1.malwaredomains.com/files/justdomains",
+//      parserType: "HostFileParser" //HostFileParser.self
+//    ),
     DefaultRuleSourceDescriptor(
       name: "My Filters",
       url: "localhost",
