@@ -36,11 +36,6 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
     coreDataMgr = CoreDataManager.sharedInstance
   }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-
 
   // MARK: - Table View
 
@@ -74,7 +69,6 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
     get {
       if nil == _fetchedResultsController {
         if let ruleSource = ruleSource {
-          // we can return real results
           coreDataMgr = CoreDataManager.sharedInstance //WTF? this gets set, then is nil
           let fetchRequest: NSFetchRequest? = coreDataMgr?.managedObjectModel?
             .fetchRequestFromTemplateWithName("RulesInSource",
