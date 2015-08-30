@@ -40,8 +40,8 @@ class HostFileParser: RuleFileParserProtocol {
       ParsedRule(
         sourceText: host,
 
-        actionSelector: nil,
         actionType: RuleActionType.Block,
+        actionSelector: nil,
 
         triggerUrlFilter: globToRegex(host),
         triggerResourceTypes: RuleResourceTypeOptions.None,

@@ -23,7 +23,7 @@ class HostFileParserSpec : QuickSpec {
   override func spec() {
     describe("initialization") {
       it("inits with a string & context") {
-        let parser = ABPRuleFileParser(fileSource: "sample text")
+        let parser = HostFileParser(fileSource: "sample text")
         expect(parser).notTo(beNil())
       }
 
@@ -39,7 +39,7 @@ class HostFileParserSpec : QuickSpec {
         }
         try! "sample text".writeToURL(tmpPath, atomically: true, encoding: NSUTF8StringEncoding)
 
-        let parser = ABPRuleFileParser(fileURL: tmpPath)
+        let parser = HostFileParser(fileURL: tmpPath)
         expect(parser).notTo(beNil())
       }
     }

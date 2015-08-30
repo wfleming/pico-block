@@ -248,8 +248,8 @@ class ABPRuleParser: NSObject {
 
     return ParsedRule(
       sourceText: ruleText,
-      actionSelector: selector,
       actionType:  action,
+      actionSelector: selector,
       triggerUrlFilter: (isRegex ? filter : globToRegex(filter!)),
       triggerResourceTypes: resourceTypes,
       triggerLoadTypes: loadTypes,

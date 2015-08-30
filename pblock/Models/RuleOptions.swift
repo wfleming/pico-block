@@ -36,6 +36,27 @@ enum RuleActionType: Int16 {
       return "ignore-previous-rules"
     }
   }
+
+  static func fromJSON(val: String?) ->  RuleActionType {
+    if let v = val {
+      switch v {
+      case "block":
+        return .Block
+      case "block-cookies":
+        return .BlockCookies
+      case "css-display-none":
+        return .CssDisplayNone
+      case "css-display-none-style-sheet":
+        return .CssDisplayNoneStyleSheet
+      case "ignore-previous-rules":
+        return .IgnorePreviousRules
+      default:
+        return .Invalid
+      }
+    } else {
+      return .Invalid
+    }
+  }
 }
 
 /**
@@ -56,16 +77,32 @@ struct RuleResourceTypeOptions: OptionSetType {
       return nil
     }
     var values = [String]()
-    if contains(RuleResourceTypeOptions.Script) {
+    if contains(.Script) {
       values.append("script")
     }
-    if contains(RuleResourceTypeOptions.Image) {
+    if contains(.Image) {
       values.append("image")
     }
-    if contains(RuleResourceTypeOptions.StyleSheet) {
+    if contains(.StyleSheet) {
       values.append("style-sheet")
     }
     return values
+  }
+
+  static func fromJSON(val: Array<String>?) -> RuleResourceTypeOptions {
+    var rv = RuleResourceTypeOptions.None
+    if let v = val {
+      if v.contains("script") {
+        rv = rv.union(.Script)
+      }
+      if v.contains("image") {
+        rv = rv.union(.Image)
+      }
+      if v.contains("style-sheet") {
+        rv = rv.union(.StyleSheet)
+      }
+    }
+    return rv
   }
 }
 
@@ -86,12 +123,25 @@ struct RuleLoadTypeOptions: OptionSetType {
       return nil
     }
     var values = [String]()
-    if contains(RuleLoadTypeOptions.FirstParty) {
+    if contains(.FirstParty) {
       values.append("first-party")
     }
-    if contains(RuleLoadTypeOptions.ThirdParty) {
+    if contains(.ThirdParty) {
       values.append("third-party")
     }
     return values
+  }
+
+  static func fromJSON(val: Array<String>?) -> RuleLoadTypeOptions {
+    var rv = RuleLoadTypeOptions.None
+    if let v = val {
+      if v.contains("first-party") {
+        rv = rv.union(.FirstParty)
+      }
+      if v.contains("third-party") {
+        rv = rv.union(.ThirdParty)
+      }
+    }
+    return rv
   }
 }

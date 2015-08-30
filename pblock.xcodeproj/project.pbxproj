@@ -35,6 +35,8 @@
 		BE673C1E1B936D2D0026D8C4 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C191B936D180026D8C4 /* Result.framework */; };
 		BE673C1F1B936D2D0026D8C4 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C191B936D180026D8C4 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE673C211B9377D60026D8C4 /* RuleUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C201B9377D60026D8C4 /* RuleUpdater.swift */; settings = {ASSET_TAGS = (); }; };
+		BE673C231B93B3460026D8C4 /* ContentRuleJSONFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */; settings = {ASSET_TAGS = (); }; };
+		BE673C251B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */; settings = {ASSET_TAGS = (); }; };
 		BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2CD1B500F62007A91AA /* CoreData.framework */; };
 		BE82A2D51B5011DA007A91AA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D31B5011DA007A91AA /* Nimble.framework */; };
 		BE82A2D61B5011DA007A91AA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D41B5011DA007A91AA /* Quick.framework */; };
@@ -163,6 +165,8 @@
 		BE673C181B936D180026D8C4 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = SOURCE_ROOT; };
 		BE673C191B936D180026D8C4 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = SOURCE_ROOT; };
 		BE673C201B9377D60026D8C4 /* RuleUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleUpdater.swift; sourceTree = "<group>"; };
+		BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRuleJSONFileParser.swift; sourceTree = "<group>"; };
+		BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRuleJSONFileParserSpec.swift; sourceTree = "<group>"; };
 		BE82A2CD1B500F62007A91AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BE82A2D01B500F91007A91AA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		BE82A2D31B5011DA007A91AA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -349,6 +353,7 @@
 				BE4FE90E1B88DC2B0075AD95 /* ABPRuleFileParser.swift */,
 				BE82A2E21B504D3B007A91AA /* ABPRuleParser.swift */,
 				BE4FE9151B8912090075AD95 /* HostFileParser.swift */,
+				BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */,
 			);
 			path = RuleParser;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 				BE4FE9111B8902040075AD95 /* ABPRuleFileParserSpec.swift */,
 				BE82A2E61B504FE7007A91AA /* ABPRuleParserSpec.swift */,
 				BE4FE9191B8916F20075AD95 /* HostFileParserSpec.swift */,
+				BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */,
 			);
 			path = RuleParserSpecs;
 			sourceTree = "<group>";
@@ -660,6 +666,7 @@
 				BE82A3001B505B5E007A91AA /* Rule+CoreDataProperties.swift in Sources */,
 				BE43E5661B4F25FC00C522FF /* RuleSourcesController.swift in Sources */,
 				BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */,
+				BE673C231B93B3460026D8C4 /* ContentRuleJSONFileParser.swift in Sources */,
 				BE4FE90F1B88DC2B0075AD95 /* ABPRuleFileParser.swift in Sources */,
 				BE4FE92B1B8953850075AD95 /* UserPrefs.swift in Sources */,
 				BE065AED1B93667E00523A5C /* PBEnv.m in Sources */,
@@ -675,6 +682,7 @@
 				BE83B0CF1B5436B90074FDA3 /* RuleOptionsSpec.swift in Sources */,
 				BE4FE91A1B8916F20075AD95 /* HostFileParserSpec.swift in Sources */,
 				BE82A30A1B508950007A91AA /* NSManagedObject+pblockSpec.swift in Sources */,
+				BE673C251B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift in Sources */,
 				BE82A3041B506B8E007A91AA /* RuleSpec.swift in Sources */,
 				BE4FE9121B8902040075AD95 /* ABPRuleFileParserSpec.swift in Sources */,
 				BE82A2E71B504FE7007A91AA /* ABPRuleParserSpec.swift in Sources */,

@@ -35,7 +35,7 @@
             </compoundIndex>
         </compoundIndexes>
     </entity>
-    <fetchRequest name="EnabledRules" entity="Rule" predicateString="source.enabled == 1"/>
+    <fetchRequest name="EnabledRules" entity="Rule" predicateString="unsupported == 0 AND source.enabled == 1 AND actionTypeRaw != 0"/>
     <fetchRequest name="MyRuleSource" entity="RuleSource" predicateString="url == &quot;localhost&quot;"/>
     <fetchRequest name="RulesInSource" entity="Rule" predicateString="source == $SOURCE"/>
     <fetchRequest name="ThirdPartyRuleSources" entity="RuleSource" predicateString="url != &quot;localhost&quot;"/>

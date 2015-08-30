@@ -11,9 +11,9 @@ class RuleSpec: QuickSpec {
       describe(".init(inContext:parsedRule:)") {
         it("initializes the Rule with attributes") {
           let pr = ParsedRule(
-            sourceText: "sr", actionSelector: "sel", actionType: RuleActionType.CssDisplayNone,
-            triggerUrlFilter: "url", triggerResourceTypes: RuleResourceTypeOptions.Script,
-            triggerLoadTypes: RuleLoadTypeOptions.ThirdParty, triggerIfDomain: ["if"],
+            sourceText: "sr", actionType: .CssDisplayNone, actionSelector: "sel",
+            triggerUrlFilter: "url", triggerResourceTypes: .Script,
+            triggerLoadTypes: .ThirdParty, triggerIfDomain: ["if"],
             triggerUnlessDomain: ["unless"]
           )
           let r = Rule(inContext: managedObjectContext, parsedRule: pr)
@@ -29,9 +29,9 @@ class RuleSpec: QuickSpec {
 
         it("handles nils") {
           let pr = ParsedRule(
-            sourceText: "sr", actionSelector: nil, actionType: RuleActionType.Block,
-            triggerUrlFilter: "url", triggerResourceTypes: RuleResourceTypeOptions.None,
-            triggerLoadTypes: RuleLoadTypeOptions.None, triggerIfDomain: nil,
+            sourceText: "sr", actionType: .Block, actionSelector: nil,
+            triggerUrlFilter: "url", triggerResourceTypes: .None,
+            triggerLoadTypes: .None, triggerIfDomain: nil,
             triggerUnlessDomain: nil
           )
           let r = Rule(inContext: managedObjectContext, parsedRule: pr)
@@ -57,58 +57,58 @@ class RuleSpec: QuickSpec {
       describe(".actionType") {
         it("should get invalid enum for invalid int val") {
           rule.actionTypeRaw = NSNumber(short: -1)
-          expect(rule.actionType).to(equal(RuleActionType.Invalid))
+          expect(rule.actionType) == RuleActionType.Invalid
         }
 
         it("should get invalid enum for correct int val") {
           rule.actionTypeRaw = NSNumber(short: RuleActionType.Invalid.rawValue)
-          expect(rule.actionType).to(equal(RuleActionType.Invalid))
+          expect(rule.actionType) == RuleActionType.Invalid
         }
 
         it("should get correct enum value for int val") {
           rule.actionTypeRaw = NSNumber(short: RuleActionType.Block.rawValue)
-          expect(rule.actionType).to(equal(RuleActionType.Block))
+          expect(rule.actionType) == RuleActionType.Block
         }
 
         it("should set actionTypeInt from setting actionType") {
           rule.actionType = RuleActionType.CssDisplayNone
-          expect(rule.actionTypeRaw).to(equal(NSNumber(short: RuleActionType.CssDisplayNone.rawValue)))
+          expect(rule.actionTypeRaw) == NSNumber(short: RuleActionType.CssDisplayNone.rawValue)
         }
       } // describe .actionType
 
       describe(".triggerLoadTypes") {
         it("set & get expected values with multiple values") {
-          rule.triggerLoadTypes = RuleLoadTypeOptions.FirstParty.union(RuleLoadTypeOptions.ThirdParty)
+          rule.triggerLoadTypes = RuleLoadTypeOptions.FirstParty.union(.ThirdParty)
           expect(rule.triggerLoadTypeRaw?.shortValue).to(beGreaterThan(0))
 
-          expect(rule.triggerLoadTypes.contains(RuleLoadTypeOptions.FirstParty)).to(beTrue())
-          expect(rule.triggerLoadTypes.contains(RuleLoadTypeOptions.ThirdParty)).to(beTrue())
+          expect(rule.triggerLoadTypes.contains(.FirstParty)).to(beTrue())
+          expect(rule.triggerLoadTypes.contains(.ThirdParty)).to(beTrue())
         }
 
         it("set & get expected values with one values") {
-          rule.triggerLoadTypes = RuleLoadTypeOptions.FirstParty
+          rule.triggerLoadTypes = .FirstParty
           expect(rule.triggerLoadTypeRaw?.shortValue).to(beGreaterThan(0))
 
-          expect(rule.triggerLoadTypes.contains(RuleLoadTypeOptions.FirstParty)).to(beTrue())
-          expect(rule.triggerLoadTypes.contains(RuleLoadTypeOptions.ThirdParty)).to(beFalse())
+          expect(rule.triggerLoadTypes.contains(.FirstParty)).to(beTrue())
+          expect(rule.triggerLoadTypes.contains(.ThirdParty)).to(beFalse())
         }
       } // describe .triggerLoadTypes
 
       describe(".triggerResourceTypes") {
         it("set & get expected values with multiple values") {
-          rule.triggerResourceTypes = RuleResourceTypeOptions.Script.union(RuleResourceTypeOptions.Image)
+          rule.triggerResourceTypes = RuleResourceTypeOptions.Script.union(.Image)
           expect(rule.triggerResourceTypeRaw?.shortValue).to(beGreaterThan(0))
 
-          expect(rule.triggerResourceTypes.contains(RuleResourceTypeOptions.Script)).to(beTrue())
-          expect(rule.triggerResourceTypes.contains(RuleResourceTypeOptions.Image)).to(beTrue())
+          expect(rule.triggerResourceTypes.contains(.Script)).to(beTrue())
+          expect(rule.triggerResourceTypes.contains(.Image)).to(beTrue())
         }
 
         it("set & get expected values with one values") {
-          rule.triggerResourceTypes = RuleResourceTypeOptions.Script
+          rule.triggerResourceTypes = .Script
           expect(rule.triggerResourceTypeRaw?.shortValue).to(beGreaterThan(0))
 
-          expect(rule.triggerResourceTypes.contains(RuleResourceTypeOptions.Script)).to(beTrue())
-          expect(rule.triggerResourceTypes.contains(RuleResourceTypeOptions.Image)).to(beFalse())
+          expect(rule.triggerResourceTypes.contains(.Script)).to(beTrue())
+          expect(rule.triggerResourceTypes.contains(.Image)).to(beFalse())
         }
       } // describe .triggerResourceTypes
 

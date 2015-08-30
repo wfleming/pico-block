@@ -116,40 +116,40 @@ class ABPRuleParserSpec : QuickSpec {
 
       it("parses exception regex rule") {
         let rule = try! ABPRuleParser("@@/example\\.[a-z]+/").parsedRule()
-        expect(rule?.actionType).to(equal(RuleActionType.IgnorePreviousRules))
-        expect(rule?.triggerUrlFilter).to(equal("example.[a-z]+"))
+        expect(rule?.actionType) == RuleActionType.IgnorePreviousRules
+        expect(rule?.triggerUrlFilter) == "example.[a-z]+"
       }
 
       it("parses regex rule with options") {
         let rule = try! ABPRuleParser("/example\\.[a-z]+/$script").parsedRule()
-        expect(rule?.actionType).to(equal(RuleActionType.Block))
-        expect(rule?.triggerUrlFilter).to(equal("example.[a-z]+"))
-        expect(rule?.triggerResourceTypes).to(equal(RuleResourceTypeOptions.Script))
+        expect(rule?.actionType) == RuleActionType.Block
+        expect(rule?.triggerUrlFilter) == "example.[a-z]+"
+        expect(rule?.triggerResourceTypes) == RuleResourceTypeOptions.Script
       }
 
       // whole bunch of cases here
       let tests = [
         "www.zerohedge.com##.similar-box": ParsedRule(
-          sourceText: "www.zerohedge.com##.similar-box", actionSelector: ".similar-box",
-          actionType: RuleActionType.CssDisplayNone, triggerUrlFilter: ".*",
-          triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.None,
+          sourceText: "www.zerohedge.com##.similar-box", actionType: .CssDisplayNone,
+          actionSelector: ".similar-box", triggerUrlFilter: ".*",
+          triggerResourceTypes: .None, triggerLoadTypes: .None,
           triggerIfDomain: ["www.zerohedge.com"], triggerUnlessDomain: nil),
         "|http://$popup,domain=filenuke.com|sharesix.com": nil as ParsedRule?,
         "##.foo": ParsedRule(
-          sourceText: "##.foo", actionSelector: ".foo",
-          actionType: RuleActionType.CssDisplayNone, triggerUrlFilter: ".*",
+          sourceText: "##.foo", actionType: RuleActionType.CssDisplayNone,
+          actionSelector: ".foo", triggerUrlFilter: ".*",
           triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.None,
           triggerIfDomain: nil, triggerUnlessDomain: nil),
         "|http://r.i.ua^$third-party": ParsedRule(
-          sourceText: "|http://r.i.ua^$third-party", actionSelector: nil,
-          actionType: RuleActionType.Block, triggerUrlFilter: "http://r\\.i\\.ua[^a-zA-z0-9_\\.\\-%]",
+          sourceText: "|http://r.i.ua^$third-party", actionType: RuleActionType.Block,
+          actionSelector: nil, triggerUrlFilter: "http://r\\.i\\.ua[^a-zA-z0-9_\\.\\-%]",
           triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.ThirdParty,
           triggerIfDomain: nil, triggerUnlessDomain: nil),
         "||addthis.com^$third-party,important": ParsedRule(
-            sourceText: "||addthis.com^$third-party,important", actionSelector: nil,
-            actionType: RuleActionType.Block, triggerUrlFilter: ".*\\.addthis\\.com[^a-zA-z0-9_\\.\\-%]",
-            triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.ThirdParty,
-            triggerIfDomain: nil, triggerUnlessDomain: nil)
+          sourceText: "||addthis.com^$third-party,important", actionType: RuleActionType.Block,
+          actionSelector: nil, triggerUrlFilter: ".*\\.addthis\\.com[^a-zA-z0-9_\\.\\-%]",
+          triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.ThirdParty,
+          triggerIfDomain: nil, triggerUnlessDomain: nil)
       ]
       func eqRule(ruleText: String, _ expected: ParsedRule) -> MatcherFunc<ParsedRule> {
         return MatcherFunc<ParsedRule> { actualExpression, failureMsg in

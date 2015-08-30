@@ -11,8 +11,8 @@ import Foundation
 struct ParsedRule: Equatable {
   var sourceText: String?,
 
-      actionSelector: String?,
       actionType: RuleActionType,
+      actionSelector: String?,
 
       triggerUrlFilter: String?,
       triggerResourceTypes: RuleResourceTypeOptions,

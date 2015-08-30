@@ -41,7 +41,7 @@ class ABPRuleFileParserSpec : QuickSpec {
         let str = "example.com\n" +
                   "foo.bar"
         let parser = ABPRuleFileParser(fileSource: str)
-        expect(parser.parsedRules().count).to(equal(2))
+        expect(parser.parsedRules().count) == 2
       }
 
       it("parses some rule lines & some comments") {
@@ -50,7 +50,7 @@ class ABPRuleFileParserSpec : QuickSpec {
                   "! comment 2\n" +
                   "foo.bar"
         let parser = ABPRuleFileParser(fileSource: str)
-        expect(parser.parsedRules().count).to(equal(2))
+        expect(parser.parsedRules().count) == 2
       }
     }
   }
