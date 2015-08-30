@@ -12,8 +12,13 @@ import CoreData
 // for writing all active rules in the DB into our content blocking json
 class ContentRulesWriter {
   private let mgr = CoreDataManager.sharedInstance
+  private var ctx: NSManagedObjectContext
   private let pageSize = 50
   private let filePathURL = rulesJSONPath()
+
+  required init() {
+    ctx = mgr.buildManagedObjectContext()!
+  }
 
   func writeRules() {
     logToGroupLogFile("app.content-rules-writer.write")
@@ -32,7 +37,7 @@ class ContentRulesWriter {
 
       var recordsWritten = 0,
           currentPage = 0,
-          currentRules = enabledRules(currentPage)
+          currentRules = self.enabledRules(currentPage)
       while currentRules.count > 0 {
         currentRules.forEach {
           do {
@@ -51,7 +56,7 @@ class ContentRulesWriter {
 
         dlog("ContentRulesWriter finished writing page \(currentPage)")
         currentPage += 1
-        currentRules = enabledRules(currentPage)
+        currentRules = self.enabledRules(currentPage)
       }
 
       fh.writeData("]".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -71,7 +76,7 @@ class ContentRulesWriter {
     fetchRequest.fetchLimit = pageSize
     fetchRequest.fetchOffset = (pageIndex * pageSize)
     do {
-      return try mgr.managedObjectContext!.executeFetchRequest(fetchRequest) as! Array<Rule>
+      return try ctx.executeFetchRequest(fetchRequest) as! Array<Rule>
     } catch {
       dlog("failed fetching: \(error)")
       return []

@@ -53,17 +53,21 @@ class CoreDataManager: NSObject {
      * persistent store coordinator for the application.) This property is optional since there are
      * legitimate error conditions that could cause the creation of the context to fail.
      */
+    return self.buildManagedObjectContext()
+  }()
+
+  func buildManagedObjectContext() -> NSManagedObjectContext? {
     let coordinator = self.persistentStoreCoordinator
     if coordinator == nil {
       return nil
     }
 
-    var managedObjectContext = NSManagedObjectContext(
+    let ctx = NSManagedObjectContext(
       concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType
     )
-    managedObjectContext.persistentStoreCoordinator = coordinator
-    return managedObjectContext
-  }()
+    ctx.persistentStoreCoordinator = coordinator
+    return ctx
+  }
 
   func appDocumentsDir() -> NSURL? {
     return NSFileManager.defaultManager().URLsForDirectory(
