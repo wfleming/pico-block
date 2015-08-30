@@ -24,3 +24,11 @@ func rulesJSONPath() -> NSURL {
   let filePathURL = dirURL.URLByAppendingPathComponent("blockRules.json")
   return filePathURL
 }
+
+func isTest() -> Bool {
+  #if DEBUG
+  return "true" == PBEnv.get("TEST_ENV")
+  #else
+  return false
+  #endif
+}

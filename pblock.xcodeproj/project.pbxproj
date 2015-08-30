@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE065AED1B93667E00523A5C /* PBEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = BE065AEC1B93667E00523A5C /* PBEnv.m */; settings = {ASSET_TAGS = (); }; };
+		BE065AEF1B93695A00523A5C /* PBEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = BE065AEC1B93667E00523A5C /* PBEnv.m */; settings = {ASSET_TAGS = (); }; };
 		BE43E5641B4F25FC00C522FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5631B4F25FC00C522FF /* AppDelegate.swift */; };
 		BE43E5661B4F25FC00C522FF /* RuleSourcesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5651B4F25FC00C522FF /* RuleSourcesController.swift */; };
 		BE43E5681B4F25FC00C522FF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5671B4F25FC00C522FF /* SecondViewController.swift */; };
@@ -119,6 +121,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE065AEB1B93667D00523A5C /* pblock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pblock-Bridging-Header.h"; sourceTree = "<group>"; };
+		BE065AEC1B93667E00523A5C /* PBEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBEnv.m; sourceTree = "<group>"; };
+		BE065AEE1B9366DB00523A5C /* PBEnv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBEnv.h; sourceTree = "<group>"; };
 		BE43E5601B4F25FB00C522FF /* pblock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pblock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE43E5631B4F25FC00C522FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE43E5651B4F25FC00C522FF /* RuleSourcesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSourcesController.swift; sourceTree = "<group>"; };
@@ -349,6 +354,9 @@
 				BE82A2E91B5052DA007A91AA /* DebugLog.swift */,
 				BE4FE91B1B891B1C0075AD95 /* Util.swift */,
 				BE94FC8C1B928961006728D5 /* Async.swift */,
+				BE065AEE1B9366DB00523A5C /* PBEnv.h */,
+				BE065AEC1B93667E00523A5C /* PBEnv.m */,
+				BE065AEB1B93667D00523A5C /* pblock-Bridging-Header.h */,
 			);
 			path = pblockLib;
 			sourceTree = "<group>";
@@ -604,7 +612,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "#/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -638,6 +646,7 @@
 				BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */,
 				BE4FE90F1B88DC2B0075AD95 /* ABPRuleFileParser.swift in Sources */,
 				BE4FE92B1B8953850075AD95 /* UserPrefs.swift in Sources */,
+				BE065AED1B93667E00523A5C /* PBEnv.m in Sources */,
 				BE82A2EF1B5057D1007A91AA /* Model.xcdatamodeld in Sources */,
 				BE82A2FE1B505B5E007A91AA /* RuleSource+CoreDataProperties.swift in Sources */,
 			);
@@ -670,6 +679,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE82A2EB1B5052DA007A91AA /* DebugLog.swift in Sources */,
+				BE065AEF1B93695A00523A5C /* PBEnv.m in Sources */,
 				BE43E59C1B4F262100C522FF /* ActionRequestHandler.swift in Sources */,
 				BE4FE91E1B891B370075AD95 /* Util.swift in Sources */,
 			);
@@ -759,6 +769,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "pblockLib/pblock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -798,6 +809,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "pblockLib/pblock-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -818,6 +830,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willfleming.pblock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "pblockLib/pblock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -836,6 +849,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willfleming.pblock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "pblockLib/pblock-Bridging-Header.h";
 			};
 			name = Release;
 		};

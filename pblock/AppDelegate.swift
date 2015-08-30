@@ -58,9 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
-    logToGroupLogFile("app.active")
-    Async.background {
-      RuleSource.refreshRemoteRuleSources()
+    if !isTest() {
+      logToGroupLogFile("app.active")
+      Async.background {
+        RuleSource.refreshRemoteRuleSources()
+      }
     }
   }
 
