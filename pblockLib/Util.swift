@@ -27,7 +27,7 @@ func rulesJSONPath() -> NSURL {
 
 func isTest() -> Bool {
   #if DEBUG
-  return "true" == PBEnv.get("TEST_ENV")
+  return nil != PBEnv.get("TEST_ENV")
   #else
   return false
   #endif

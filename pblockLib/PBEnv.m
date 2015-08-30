@@ -12,8 +12,12 @@
 @implementation PBEnv
 
 + (NSString*) get:(NSString*)name {
-  return [NSString stringWithCString:getenv([name cStringUsingEncoding:NSUTF8StringEncoding])
-                            encoding:NSUTF8StringEncoding];
+  char	*val = getenv([name cStringUsingEncoding:NSUTF8StringEncoding]);
+  if (NULL == val) {
+    return nil;
+  } else {
+    return [NSString stringWithCString:val encoding:NSUTF8StringEncoding];
+  }
 }
 
 @end
