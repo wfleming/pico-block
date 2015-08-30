@@ -145,6 +145,11 @@ class ABPRuleParserSpec : QuickSpec {
           actionType: RuleActionType.Block, triggerUrlFilter: "http://r\\.i\\.ua[^a-zA-z0-9_\\.\\-%]",
           triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.ThirdParty,
           triggerIfDomain: nil, triggerUnlessDomain: nil),
+        "||addthis.com^$third-party,important": ParsedRule(
+            sourceText: "||addthis.com^$third-party,important", actionSelector: nil,
+            actionType: RuleActionType.Block, triggerUrlFilter: ".*\\.addthis\\.com[^a-zA-z0-9_\\.\\-%]",
+            triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.ThirdParty,
+            triggerIfDomain: nil, triggerUnlessDomain: nil)
       ]
       func eqRule(ruleText: String, _ expected: ParsedRule) -> MatcherFunc<ParsedRule> {
         return MatcherFunc<ParsedRule> { actualExpression, failureMsg in

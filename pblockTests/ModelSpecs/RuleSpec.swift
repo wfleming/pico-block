@@ -5,8 +5,49 @@ import CoreData
 
 class RuleSpec: QuickSpec {
   override func spec() {
+    let managedObjectContext = self.createInMemoryCoreDataCtx()
+
+    describe("initializing a rule") {
+      describe(".init(inContext:parsedRule:)") {
+        it("initializes the Rule with attributes") {
+          let pr = ParsedRule(
+            sourceText: "sr", actionSelector: "sel", actionType: RuleActionType.CssDisplayNone,
+            triggerUrlFilter: "url", triggerResourceTypes: RuleResourceTypeOptions.Script,
+            triggerLoadTypes: RuleLoadTypeOptions.ThirdParty, triggerIfDomain: ["if"],
+            triggerUnlessDomain: ["unless"]
+          )
+          let r = Rule(inContext: managedObjectContext, parsedRule: pr)
+          expect(r.sourceText) == pr.sourceText
+          expect(r.actionSelector) == pr.actionSelector
+          expect(r.actionType) == pr.actionType
+          expect(r.triggerUrlFilter) == pr.triggerUrlFilter
+          expect(r.triggerResourceTypes) == pr.triggerResourceTypes
+          expect(r.triggerLoadTypes) == pr.triggerLoadTypes
+          expect(r.triggerIfDomain?.array.map { $0.domain }) == pr.triggerIfDomain
+          expect(r.triggerUnlessDomain?.array.map { $0.domain }) == pr.triggerUnlessDomain
+        }
+
+        it("handles nils") {
+          let pr = ParsedRule(
+            sourceText: "sr", actionSelector: nil, actionType: RuleActionType.Block,
+            triggerUrlFilter: "url", triggerResourceTypes: RuleResourceTypeOptions.None,
+            triggerLoadTypes: RuleLoadTypeOptions.None, triggerIfDomain: nil,
+            triggerUnlessDomain: nil
+          )
+          let r = Rule(inContext: managedObjectContext, parsedRule: pr)
+          expect(r.sourceText) == pr.sourceText
+          expect(r.actionSelector).to(beNil())
+          expect(r.actionType) == pr.actionType
+          expect(r.triggerUrlFilter) == pr.triggerUrlFilter
+          expect(r.triggerResourceTypes) == pr.triggerResourceTypes
+          expect(r.triggerLoadTypes) == pr.triggerLoadTypes
+          expect(r.triggerIfDomain?.count) == 0
+          expect(r.triggerUnlessDomain?.count) == 0
+        }
+      }
+    }
+
     describe("a Rule") {
-      let managedObjectContext = self.createInMemoryCoreDataCtx()
       var rule : Rule!
 
       beforeEach {
@@ -70,6 +111,59 @@ class RuleSpec: QuickSpec {
           expect(rule.triggerResourceTypes.contains(RuleResourceTypeOptions.Image)).to(beFalse())
         }
       } // describe .triggerResourceTypes
+
+      describe(".asJSON") {
+        let rule = Rule(inContext: managedObjectContext)
+
+        beforeEach {
+          rule.sourceText = "sr"
+          rule.actionType = RuleActionType.Block
+          rule.actionSelector = "sel"
+          rule.triggerUrlFilter = "foo\\.bar"
+          rule.triggerLoadTypes = RuleLoadTypeOptions.ThirdParty
+          rule.triggerResourceTypes = RuleResourceTypeOptions.Script
+          let d1 = RuleDomain(inContext: managedObjectContext)
+          d1.domain = "if"
+          rule.triggerIfDomain = NSOrderedSet(array: [d1])
+          let d2 = RuleDomain(inContext: managedObjectContext)
+          d2.domain = "unless"
+          rule.triggerUnlessDomain = NSOrderedSet(array: [d2])
+        }
+
+        it("generates JSON for all values") {
+          let json = NSString(
+            data: try! NSJSONSerialization.dataWithJSONObject(rule.asJSON(),
+                options: NSJSONWritingOptions.init(rawValue: 0)
+            ),
+            encoding: NSUTF8StringEncoding
+          )
+
+          expect(json).to(contain("\"type\":\"block\""))
+          expect(json).to(contain("\"url-filter\":\"foo\\\\.bar\""))
+          expect(json).to(contain("\"load-type\":[\"third-party\"]"))
+          expect(json).to(contain("\"resource-type\":[\"script\"]"))
+          expect(json).to(contain("\"if-domain\":[\"if\"]"))
+          expect(json).to(contain("\"unless-domain\":[\"unless\"]"))
+        }
+
+        it("handles nils") {
+          rule.triggerIfDomain = nil
+          rule.triggerUnlessDomain = nil
+          let json = NSString(
+            data: try! NSJSONSerialization.dataWithJSONObject(rule.asJSON(),
+              options: NSJSONWritingOptions.init(rawValue: 0)
+            ),
+            encoding: NSUTF8StringEncoding
+          )
+
+          expect(json).to(contain("\"type\":\"block\""))
+          expect(json).to(contain("\"url-filter\":\"foo\\\\.bar\""))
+          expect(json).to(contain("\"load-type\":[\"third-party\"]"))
+          expect(json).to(contain("\"resource-type\":[\"script\"]"))
+          expect(json).notTo(contain("\"if-domain\""))
+          expect(json).notTo(contain("\"unless-domain\""))
+        }
+      } // describe .asJSON
     }
   }
 }
