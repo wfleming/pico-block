@@ -54,7 +54,7 @@ class ABPRuleParser: NSObject {
 
   // primary public interface: call to get back all rules parsed from the text
   func parsedRule() throws -> ParsedRule? {
-    if ruleText.hasPrefix("#") || ruleText.hasPrefix("!") {
+    if (ruleText.hasPrefix("#") && !ruleText.hasPrefix("##")) || ruleText.hasPrefix("!") {
       throw ABPRuleParserError("This is a comment line: you shouldn't try to parse these")
     }
 
@@ -62,8 +62,8 @@ class ABPRuleParser: NSObject {
 
     //DEBUG
     // I'm seeing some bad rules, but aren't sure where they came from
-    if let f = filter {
-      if ".*" == f || f.hasPrefix("|") {
+    if let f = filter where !unsupported {
+      if (".*" == f && action == RuleActionType.Block) || f.hasPrefix("|") {
         dlog("this rule got parsed badly: \(ruleText)")
         abort()
       }
@@ -164,6 +164,13 @@ class ABPRuleParser: NSObject {
       }
       return false
     }
+    if(opts.contains("popup")) {
+      //popup block rules tend to be weird, and they're not a big problem these days
+      unsupported = true
+      return
+    }
+
+    //TODO: support the "important" option
     //TODO: support ~ syntax for resource types
     let resourceTypeMap = [
       "script": RuleResourceTypeOptions.Script,
@@ -187,7 +194,7 @@ class ABPRuleParser: NSObject {
 
     for (idx, val) in opts.enumerate() {
       if val.hasPrefix("domain=") {
-        let domains = val.substringFromIndex(val.startIndex.advancedBy(8))
+        let domains = val.substringFromIndex(val.startIndex.advancedBy(7))
         addDomains(domains, separator: "|")
         opts.removeAtIndex(idx)
         break;
@@ -201,6 +208,9 @@ class ABPRuleParser: NSObject {
 
   // for domains patterns on element hide rules, and advanced $domain= options
   private func addDomains(domainsStr: String, separator: String) {
+    if domainsStr == "" {
+      return
+    }
     // we do not currently handle unicode/punycode: can probably ignore for a while
     // we do not currently handle wildcards in domains here: last time i tested, they/regexes
     // weren't supported by content blocking if-domains/unless-domains

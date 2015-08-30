@@ -126,6 +126,46 @@ class ABPRuleParserSpec : QuickSpec {
         expect(rule?.triggerUrlFilter).to(equal("example.[a-z]+"))
         expect(rule?.triggerResourceTypes).to(equal(RuleResourceTypeOptions.Script))
       }
+
+      // whole bunch of cases here
+      let tests = [
+        "www.zerohedge.com##.similar-box": ParsedRule(
+          sourceText: "www.zerohedge.com##.similar-box", actionSelector: ".similar-box",
+          actionType: RuleActionType.CssDisplayNone, triggerUrlFilter: ".*",
+          triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.None,
+          triggerIfDomain: ["www.zerohedge.com"], triggerUnlessDomain: nil),
+        "|http://$popup,domain=filenuke.com|sharesix.com": nil as ParsedRule?,
+        "##.foo": ParsedRule(
+          sourceText: "##.foo", actionSelector: ".foo",
+          actionType: RuleActionType.CssDisplayNone, triggerUrlFilter: ".*",
+          triggerResourceTypes: RuleResourceTypeOptions.None, triggerLoadTypes: RuleLoadTypeOptions.None,
+          triggerIfDomain: nil, triggerUnlessDomain: nil)
+      ]
+      func eqRule(ruleText: String, _ expected: ParsedRule) -> MatcherFunc<ParsedRule> {
+        return MatcherFunc<ParsedRule> { actualExpression, failureMsg in
+          let actual = try! actualExpression.evaluate() as ParsedRule!
+          failureMsg.postfixMessage = "source text \"\(ruleText)\""
+          failureMsg.actualValue = ": actual | expected, " +
+            "source: \(actual.actionType) | \(expected.actionType), " +
+            "selector: \(actual.actionSelector) | \(expected.actionSelector), " +
+            "url-filter: \(actual.triggerUrlFilter) | \(expected.triggerUrlFilter), " +
+            "resource-types: \(actual.triggerResourceTypes) | \(expected.triggerResourceTypes), " +
+            "load-types: \(actual.triggerLoadTypes) | \(expected.triggerLoadTypes), " +
+            "if-domain: \(actual.triggerIfDomain) | \(expected.triggerIfDomain), " +
+            "unless-domain: \(actual.triggerUnlessDomain) | \(expected.triggerUnlessDomain)"
+          return actual == expected
+        }
+      }
+      tests.forEach({ (text:String, expected: ParsedRule?) -> () in
+        it("correctly parses \"\(text)\"") {
+          let rule = try! ABPRuleParser(text).parsedRule()
+          if nil == expected {
+            expect(rule).to(beNil())
+          } else {
+            expect(rule).to(eqRule(text, expected!))
+          }
+        }
+      })
     }
   }
 }
