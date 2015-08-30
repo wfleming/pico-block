@@ -53,10 +53,12 @@ func logToGroupLogFile(message: String) {
       }
       do {
         let fh = try NSFileHandle(forWritingToURL: logURL)
+        defer {
+          fh.closeFile()
+        }
         fh.seekToEndOfFile()
         let logLine = "\(NSDate().description) $\(message)\n"
         fh.writeData(logLine.dataUsingEncoding(NSUTF8StringEncoding)!)
-        fh.closeFile()
       } catch {
         print("Error encountered trying to write message \"\(message)\"to group log: \(error)\n")
       }

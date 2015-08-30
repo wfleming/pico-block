@@ -60,6 +60,16 @@ class ABPRuleParser: NSObject {
 
     doParse()
 
+    //DEBUG
+    // I'm seeing some bad rules, but aren't sure where they came from
+    if let f = filter {
+      if ".*" == f || f.hasPrefix("|") {
+        dlog("this rule got parsed badly: \(ruleText)")
+        abort()
+      }
+    }
+    //END DEBUG
+
     return buildParsedRule()
   }
 

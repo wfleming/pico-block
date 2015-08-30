@@ -24,6 +24,7 @@
         <attribute name="url" attributeType="String" syncable="YES"/>
         <relationship name="rules" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Rule" inverseName="source" inverseEntity="Rule" syncable="YES"/>
     </entity>
+    <fetchRequest name="EnabledRules" entity="Rule" predicateString="source.enabled == 1"/>
     <fetchRequest name="MyRuleSource" entity="RuleSource" predicateString="url == &quot;localhost&quot;"/>
     <fetchRequest name="RulesInSource" entity="Rule" predicateString="source == $SOURCE"/>
     <fetchRequest name="ThirdPartyRuleSources" entity="RuleSource" predicateString="url != &quot;localhost&quot;"/>

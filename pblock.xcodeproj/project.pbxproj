@@ -53,6 +53,8 @@
 		BE83B0CF1B5436B90074FDA3 /* RuleOptionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */; };
 		BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */; };
 		BE83B0D31B543B320074FDA3 /* RuleDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D11B543B320074FDA3 /* RuleDomain.swift */; };
+		BE94FC8B1B92846A006728D5 /* ContentRulesWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE94FC8A1B92846A006728D5 /* ContentRulesWriter.swift */; settings = {ASSET_TAGS = (); }; };
+		BE94FC8D1B928961006728D5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE94FC8C1B928961006728D5 /* Async.swift */; settings = {ASSET_TAGS = (); }; };
 		BE9F0A851B8AAEFD00AB1D2F /* SplitViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -167,6 +169,8 @@
 		BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleOptionsSpec.swift; sourceTree = "<group>"; };
 		BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RuleDomain+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BE83B0D11B543B320074FDA3 /* RuleDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleDomain.swift; sourceTree = "<group>"; };
+		BE94FC8A1B92846A006728D5 /* ContentRulesWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRulesWriter.swift; sourceTree = "<group>"; };
+		BE94FC8C1B928961006728D5 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplitViewDelegate.swift; path = "Supporting Files/SplitViewDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,6 +287,7 @@
 				BE82A3051B5073E7007A91AA /* CoreDataManager.swift */,
 				BE4FE9221B891E510075AD95 /* DefaultData.swift */,
 				BE4FE92A1B8953850075AD95 /* UserPrefs.swift */,
+				BE94FC8A1B92846A006728D5 /* ContentRulesWriter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 			children = (
 				BE82A2E91B5052DA007A91AA /* DebugLog.swift */,
 				BE4FE91B1B891B1C0075AD95 /* Util.swift */,
+				BE94FC8C1B928961006728D5 /* Async.swift */,
 			);
 			path = pblockLib;
 			sourceTree = "<group>";
@@ -617,8 +623,10 @@
 				BE43E5681B4F25FC00C522FF /* SecondViewController.swift in Sources */,
 				BE4FE91D1B891B330075AD95 /* Util.swift in Sources */,
 				BE43E5641B4F25FC00C522FF /* AppDelegate.swift in Sources */,
+				BE94FC8B1B92846A006728D5 /* ContentRulesWriter.swift in Sources */,
 				BE4FE9181B8912390075AD95 /* RuleFileParserProtocol.swift in Sources */,
 				BE82A2E31B504D3B007A91AA /* ABPRuleParser.swift in Sources */,
+				BE94FC8D1B928961006728D5 /* Async.swift in Sources */,
 				BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */,
 				BE4E4DF41B923BE500AEB7E4 /* DetailViewControllerProtocol.swift in Sources */,
 				BE82A2FF1B505B5E007A91AA /* RuleSource.swift in Sources */,

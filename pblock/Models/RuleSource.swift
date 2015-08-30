@@ -26,6 +26,11 @@ class RuleSource: NSManagedObject {
       dlog("failed fetching: \(error)")
       abort()
     }
+
+    //TODO: use ReactiveCocoa & flatMap everything: we can't run this until all remote sources are
+    // refreshed
+    //TODO: also, only do this if there have been actual rules changes.
+    ContentRulesWriter().writeRules()
   }
 
   // fetch updated contents from a remote URL, and parse into local rules
@@ -56,7 +61,7 @@ class RuleSource: NSManagedObject {
               }
               // parse the rules & save everything
               self.rules = NSOrderedSet(array: parser.parsedRules().map { (parsedRule) -> Rule in
-                let rule = Rule(parsedRule: parsedRule)
+                let rule = Rule(inContext: coreDataCtx, parsedRule: parsedRule)
                 rule.source = self
                 return rule
               })

@@ -12,9 +12,9 @@ import CoreData
 @objc(Rule)
 class Rule: NSManagedObject {
 
-  convenience init(parsedRule: ParsedRule) {
-    let ctx = CoreDataManager.sharedInstance.managedObjectContext!
-    self.init(inContext: ctx)
+  // intitialize from a ParsedRule in the default object context
+  convenience init(inContext: NSManagedObjectContext, parsedRule: ParsedRule) {
+    self.init(inContext: inContext)
     sourceText = parsedRule.sourceText
     actionType = parsedRule.actionType
     actionSelector = parsedRule.actionSelector
@@ -24,7 +24,7 @@ class Rule: NSManagedObject {
 
     if let ifDomains = parsedRule.triggerIfDomain {
       triggerIfDomain = NSOrderedSet(array: ifDomains.map({ (domainStr) -> RuleDomain in
-        let d = RuleDomain(inContext: ctx)
+        let d = RuleDomain(inContext: inContext)
         d.domain = domainStr
         return d
       }))
@@ -32,7 +32,7 @@ class Rule: NSManagedObject {
 
     if let unlessDomains = parsedRule.triggerUnlessDomain {
       triggerUnlessDomain = NSOrderedSet(array: unlessDomains.map({ (domainStr) -> RuleDomain in
-        let d = RuleDomain(inContext: ctx)
+        let d = RuleDomain(inContext: inContext)
         d.domain = domainStr
         return d
       }))
@@ -95,5 +95,38 @@ class Rule: NSManagedObject {
         triggerResourceTypeRaw = NSNumber(short: newValue.rawValue)
       }
     }
+  }
+
+  // return the WebKit Content Blocker JSON for this rule
+  func asJSON() -> Dictionary<String, AnyObject> {
+    var actionJSON = Dictionary<String, AnyObject>(),
+        triggerJSON = Dictionary<String, AnyObject>()
+
+    actionJSON["type"] = actionType.jsonValue()
+    if let cssSelector = actionSelector {
+      actionJSON["selector"] = cssSelector
+    }
+
+    if let urlFilter = triggerUrlFilter {
+      triggerJSON["url-filter"] = urlFilter
+    }
+    if let resourceTypes = triggerResourceTypes.jsonValue() {
+      triggerJSON["resource-type"] = resourceTypes
+    }
+    if let loadTypes = triggerLoadTypes.jsonValue() {
+      triggerJSON["load-type"] = loadTypes
+    }
+    if let ifDomains = triggerIfDomain?.array where ifDomains.count > 0 {
+      triggerJSON["if-domain"] = ifDomains.map { $0.domain }
+    }
+    if let unlessDomains = triggerUnlessDomain?.array where unlessDomains.count > 0 {
+      triggerJSON["unless-domain"] = unlessDomains.map { $0.domain }
+    }
+
+
+    return [
+      "action": actionJSON,
+      "trigger": triggerJSON,
+    ]
   }
 }
