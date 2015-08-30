@@ -26,14 +26,14 @@ class RuleUpdater {
           return b
         } else {
           // consider record with enabled => nil to be disabled: this shouldn't happen, though?
-          dlog("RuleUpdater: source \($0.name) had unexpected nil enabled")
+          dlog("source \($0.name) had unexpected nil enabled")
           return false
         }
       }
-      dlog("RuleUpdater.forAllEnabledSources: \(enabledSources.count) sources")
+      dlog("\(enabledSources.count) sources")
       return self.init(sources: enabledSources)
     } catch {
-      dlog("RuleUpdater.forAllEnabledSources failed fetching: \(error)")
+      dlog("failed fetching: \(error)")
       abort()
     }
   }
@@ -130,9 +130,9 @@ class RuleUpdater {
   func reqSourceContents(source: RuleSource, _ subscriber: RACSubscriber) -> Request {
     return Alamofire.request(.GET, source.url!)
       .responseString { _, response, result in
-        dlog("RuleUpdater: got response for contents of \(source.name)")
+        dlog("got response for contents of \(source.name)")
         if !result.isSuccess {
-          dlog("RuleUpdater: the response for \(source.name) does not indicate success: \(response)")
+          dlog("the response for \(source.name) does not indicate success: \(response)")
           subscriber.sendNext(false)
           subscriber.sendCompleted()
           return
