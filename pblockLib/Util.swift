@@ -25,6 +25,13 @@ func rulesJSONPath() -> NSURL {
   return filePathURL
 }
 
+func synchronized<T>(obj: AnyObject, blk:() -> T) -> T {
+  objc_sync_enter(obj)
+  let r = blk()
+  objc_sync_exit(obj)
+  return r
+}
+
 func isTest() -> Bool {
   #if DEBUG
   return nil != PBEnv.get("TEST_ENV")
