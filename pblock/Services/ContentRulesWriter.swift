@@ -12,6 +12,8 @@ import ReactiveCocoa
 
 // for writing all active rules in the DB into our content blocking json
 class ContentRulesWriter {
+  static let maxRules = 10000 // note this seems to differ by platform: this value is for iOS
+
   private let mgr = CoreDataManager.sharedInstance
   private var ctx: NSManagedObjectContext
   private let pageSize = 50
@@ -66,6 +68,13 @@ class ContentRulesWriter {
         }
 
         dlog("ContentRulesWriter finished writing page \(currentPage)")
+
+        if recordsWritten >= (self.dynamicType.maxRules - pageSize) {
+          dlog("wrote \(recordsWritten) rules: stopping now to avoid going over limit")
+          fh.writeData("]".dataUsingEncoding(NSUTF8StringEncoding)!)
+          return
+        }
+
         currentPage += 1
         currentRules = self.enabledRules(currentPage)
       }
