@@ -7,7 +7,7 @@
         <attribute name="triggerLoadTypeRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerResourceTypeRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerUrlFilter" attributeType="String" syncable="YES"/>
-        <attribute name="unsupported" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="unsupported" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="RuleSource" inverseName="rules" inverseEntity="RuleSource" syncable="YES"/>
         <relationship name="triggerIfDomain" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RuleDomain" syncable="YES"/>
         <relationship name="triggerUnlessDomain" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RuleDomain" syncable="YES"/>
@@ -22,7 +22,7 @@
         <attribute name="domain" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="RuleSource" representedClassName="RuleSource" syncable="YES">
-        <attribute name="enabled" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="enabled" attributeType="Boolean" defaultValueString="YES" indexed="YES" syncable="YES"/>
         <attribute name="etag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,13 +35,13 @@
             </compoundIndex>
         </compoundIndexes>
     </entity>
-    <fetchRequest name="EnabledRules" entity="Rule" predicateString="unsupported == 0 AND source.enabled == 1 AND actionTypeRaw != 0"/>
+    <fetchRequest name="EnabledRules" entity="Rule" predicateString="source.enabled == 1 AND actionTypeRaw != 0"/>
     <fetchRequest name="MyRuleSource" entity="RuleSource" predicateString="url == &quot;localhost&quot;"/>
     <fetchRequest name="RulesInSource" entity="Rule" predicateString="source == $SOURCE"/>
     <fetchRequest name="ThirdPartyRuleSources" entity="RuleSource" predicateString="url != &quot;localhost&quot;"/>
     <elements>
-        <element name="Rule" positionX="-297" positionY="-63" width="128" height="195"/>
+        <element name="Rule" positionX="-297" positionY="-63" width="128" height="30"/>
         <element name="RuleDomain" positionX="-171" positionY="9" width="128" height="60"/>
-        <element name="RuleSource" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="RuleSource" positionX="-54" positionY="-9" width="128" height="30"/>
     </elements>
 </model>
