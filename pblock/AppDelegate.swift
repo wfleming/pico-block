@@ -65,11 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if !isTest() {
       logToGroupLogFile("app.active")
       Async.background {
-        let signal = RuleUpdater.forAllEnabledSources().doUpdate().take(1)
+        let signal = RuleUpdater.forAllEnabledSources().doUpdate().takeLast(1)
         signal.toSignalProducer().on(next: {
-          if let count = $0 as? Int where count > 0 {
-            ContentRulesWriter().writeRulesSignal().toSignalProducer().on(completed: {
-              self.refreshExtension()
+          if let updatedSources = $0 as? Int where updatedSources > 0 {
+            ContentRulesWriter().writeRulesSignal().toSignalProducer().on(next: {
+              if let writtenRules = $0 as? Int where writtenRules > 0 {
+                self.refreshExtension()
+              }
             }).start()
           }
         }).start()
