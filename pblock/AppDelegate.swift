@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func refreshExtension() {
     logToGroupLogFile("app.request-extension-refresh")
     SFContentBlockerManager.reloadContentBlockerWithIdentifier(
-      "com.wfleming.pblock.pblock-extension") { (error: NSError?) -> Void in
+      "com.willfleming.pblock.pblock-extension") { (error: NSError?) -> Void in
       if let err = error {
         dlog("extension rules failed to load: \(err)")
       } else {
