@@ -15,6 +15,7 @@ class RuleUpdater {
   private let etagHeader = "ETag"
   let updateWaitInterval = (60 * 60 * 6) as Double // 6 hours
   private var sources: Array<RuleSource>
+  private var coreDataCtx: NSManagedObjectContext
 
   class func forAllEnabledSources() -> RuleUpdater {
     let mgr = CoreDataManager.sharedInstance
@@ -34,39 +35,42 @@ class RuleUpdater {
         }
       }
       dlog("\(enabledSources.count) sources")
-      return self.init(sources: enabledSources)
+      return self.init(ctx: ctx, sources: enabledSources)
     } catch {
       dlog("failed fetching: \(error)")
       abort()
     }
   }
 
-  required init(sources: Array<RuleSource>) {
+  required init(ctx: NSManagedObjectContext, sources: Array<RuleSource>) {
+    self.coreDataCtx = ctx
     self.sources = sources
   }
 
   // constructs a signal that encapsulates all update logic: this signal will emit an integer
   // which is the number of rule soures that actually fetched & parsed new rules.
   func doUpdate() -> RACSignal {
-    return RACSignal.zip(self.sources.map { updateSource($0) }).scanWithStart(0,
-      reduce: { (memo: AnyObject!, next: AnyObject!) -> AnyObject! in
-        let memoInt = memo as! Int
-        if let nextTuple = next as? RACTuple {
+    return RACSignal.zip(self.sources.map { updateSource($0) })
+      .map({ (val: AnyObject!) -> AnyObject! in
+        if let nextTuple = val as? RACTuple {
           return nextTuple.allObjects().reduce(0,
             combine: { (sum: Int, updated: AnyObject) -> Int in
               if let updatedBool = updated as? Bool where updatedBool {
-               return sum + 1
+                return sum + 1
               } else {
                 return sum
               }
             })
+        } else {
+          return 0
         }
-        return memoInt
       })
   }
 
   // construct a signal for a source that emits whether the rule needs updating
   func sourceNeedsUpdate(source: RuleSource) -> RACSignal {
+    assert(!source.fault, "PROBLEM: fault is not firing \(source)")
+
     return RACSignal.createSignal({ (sub: RACSubscriber!) -> RACDisposable! in
       var urlFetch: Request?
       if let d = source.lastUpdatedAt {
@@ -75,16 +79,18 @@ class RuleUpdater {
           if let etag = source.etag where etag.characters.count > 0 {
             // fetch the HEAD of the url, compare etag
             urlFetch = Alamofire.request(.HEAD, source.url!)
-              .response { (_, response, _, _) in
-                var cacheExpired = true
-                if let respEtag = response?.allHeaderFields[self.etagHeader] as! String? {
-                  if respEtag.characters.count > 0 {
-                    cacheExpired = respEtag != etag
-                  }
-                }
-                sub.sendNext(cacheExpired)
-                sub.sendCompleted()
-            }
+              .response(queue: dispatch_get_global_queue(QOS_CLASS_UTILITY, 0),
+                responseSerializer: Request.stringResponseSerializer(),
+                completionHandler: { (_, response, _) in
+                    var cacheExpired = true
+                    if let respEtag = response?.allHeaderFields[self.etagHeader] as! String? {
+                      if respEtag.characters.count > 0 {
+                        cacheExpired = respEtag != etag
+                      }
+                    }
+                    sub.sendNext(cacheExpired)
+                    sub.sendCompleted()
+                })
           } else {
             // we haven't updated in a while, and don't have a cache header to check, so return true
             sub.sendNext(true)
@@ -132,48 +138,49 @@ class RuleUpdater {
 
   func reqSourceContents(source: RuleSource, _ subscriber: RACSubscriber) -> Request {
     return Alamofire.request(.GET, source.url!)
-      .responseString { _, response, result in
-        dlog("got response for contents of \(source.name)")
-        if !result.isSuccess {
-          dlog("the response for \(source.name) does not indicate success: \(response)")
-          subscriber.sendNext(false)
-          subscriber.sendCompleted()
-          return
-        }
-        // store etag (if present) for future use
-        source.etag = response?.allHeaderFields[self.etagHeader] as! String?
-        // parse returned rules
-        if let contents = result.value {
-          self.parseNewRules(source, contents, subscriber)
-        }
-      }
+      .response(queue: dispatch_get_global_queue(QOS_CLASS_UTILITY, 0),
+        responseSerializer: Request.stringResponseSerializer(),
+        completionHandler: { _, response, result in
+          dlog("got response for contents of \(source.name)")
+          if !result.isSuccess {
+            dlog("the response for \(source.name) does not indicate success: \(response)")
+            subscriber.sendNext(false)
+            subscriber.sendCompleted()
+            return
+          }
+          // store caching info on rule source
+          source.lastUpdatedAt = NSDate()
+          source.etag = response?.allHeaderFields[self.etagHeader] as! String?
+          CoreDataManager.sharedInstance.saveContext(self.coreDataCtx)
+          // parse returned rules
+          if let contents = result.value {
+            self.parseNewRules(source.objectID, contents, subscriber)
+          }
+        })
   }
 
-  func parseNewRules(source: RuleSource, _ contents: String, _ subscriber: RACSubscriber) {
+  func parseNewRules(sourceId: NSManagedObjectID, _ contents: String, _ subscriber: RACSubscriber) {
     defer {
       subscriber.sendNext(true)
       subscriber.sendCompleted()
     }
-    let coreDataCtx = CoreDataManager.sharedInstance.childManagedObjectContext()!
+    // because this runs in yet another thread, it needs its own
+    let childCtx = CoreDataManager.sharedInstance.childManagedObjectContext()!
+    let source = childCtx.objectWithID(sourceId) as! RuleSource
     let parserClass = source.parserClass()!
     let parser = parserClass.init(fileSource: contents)
     // destroy the old rules on this source
     if let oldRules = source.rules {
-      oldRules.forEach { coreDataCtx.deleteObject($0 as! NSManagedObject) }
+      oldRules.forEach { childCtx.deleteObject($0 as! NSManagedObject) }
     }
     // parse the rules & save everything
     source.rules = NSOrderedSet(array: parser.parsedRules().map { (parsedRule) -> Rule in
-      let rule = Rule(inContext: coreDataCtx, parsedRule: parsedRule)
+      let rule = Rule(inContext: childCtx, parsedRule: parsedRule)
       rule.source = source
       return rule
       })
     source.lastUpdatedAt = NSDate()
     dlog("rule source \(source.name) now has \(source.rules?.count) parsed rules")
-    do {
-      try coreDataCtx.save()
-    } catch {
-      dlog("save failed! \(error)")
-      abort()
-    }
+    CoreDataManager.sharedInstance.saveContext(childCtx)
   }
 }

@@ -56,14 +56,12 @@ class RuleSourcesController: UITableViewController, NSFetchedResultsControllerDe
 
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete {
-      let context = self.fetchedResultsController.managedObjectContext
-      context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
-
-      do {
-        try context.save()
-      } catch {
-        dlog("failed to save \(error)")
-        abort() // crash!
+      Async.background {
+        let context = self.fetchedResultsController.managedObjectContext
+        context.deleteObject(
+          self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
+        )
+        CoreDataManager.sharedInstance.saveContext(context)
       }
     }
   }

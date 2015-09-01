@@ -64,9 +64,10 @@ class DefaultData  {
 
   class func setup() {
     let coreDataMgr = CoreDataManager.sharedInstance
+    let ctx = coreDataMgr.childManagedObjectContext()
 
     defaultRuleSources.forEach { (DefaultRuleSourceDescriptor rsd) -> () in
-      let ruleSource = RuleSource(inContext: coreDataMgr.managedObjectContext!)
+      let ruleSource = RuleSource(inContext: ctx!)
       ruleSource.name = rsd.name
       ruleSource.url = rsd.url
       if let parserClass = rsd.parserType {
@@ -76,10 +77,6 @@ class DefaultData  {
       }
     }
 
-    do {
-      try coreDataMgr.managedObjectContext?.save()
-    } catch let error {
-      dlog("save failed: \(error)")
-    }
+    coreDataMgr.saveContext(ctx)
   }
 }

@@ -11,6 +11,9 @@ import CoreData
 import UIKit
 
 class RulesController: UITableViewController, NSFetchedResultsControllerDelegate, DetailViewController {
+  private let batchSize = 50
+  private let cacheName = "ThirdPartyRuleListCache"
+
   var ruleSource: RuleSource? {
     didSet {
       _fetchedResultsController = nil
@@ -72,12 +75,14 @@ class RulesController: UITableViewController, NSFetchedResultsControllerDelegate
             )
           fetchRequest?.sortDescriptors = [ NSSortDescriptor(key: "sourceText", ascending: true) ]
           fetchRequest?.shouldRefreshRefetchedObjects = true
+          fetchRequest?.fetchBatchSize = batchSize
           if let fr = fetchRequest {
+            NSFetchedResultsController.deleteCacheWithName(cacheName)
             _fetchedResultsController = NSFetchedResultsController(
               fetchRequest: fr,
               managedObjectContext: CoreDataManager.sharedInstance.managedObjectContext!,
               sectionNameKeyPath: nil,
-              cacheName: nil
+              cacheName: cacheName
             )
             _fetchedResultsController?.delegate = self
 

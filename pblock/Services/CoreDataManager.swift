@@ -60,16 +60,19 @@ class CoreDataManager: NSObject {
      * persistent store coordinator for the application.) This property is optional since there are
      * legitimate error conditions that could cause the creation of the context to fail.
      */
-    if nil == self._memoCtx {
-      let coordinator = self.persistentStoreCoordinator
-      if coordinator == nil {
-        return nil
-      }
+    synchronized(self) {
+      if nil == self._memoCtx {
+        dlog("creating the main context")
+        let coordinator = self.persistentStoreCoordinator
+        if coordinator == nil {
+          return
+        }
 
-      self._memoCtx = NSManagedObjectContext(
-        concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType
-      )
-      self._memoCtx?.persistentStoreCoordinator = coordinator
+        self._memoCtx = NSManagedObjectContext(
+          concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType
+        )
+        self._memoCtx?.persistentStoreCoordinator = coordinator
+      }
     }
     return self._memoCtx
   }()
@@ -81,6 +84,30 @@ class CoreDataManager: NSObject {
     )
     ctx.parentContext = managedObjectContext
     return ctx
+  }
+
+  // when saving a child context, you also need to save the parent, and you need to block
+  func saveContext(ctx: NSManagedObjectContext?) {
+    func trySave(ctx: NSManagedObjectContext?, msg: String) {
+      do {
+        try ctx?.save()
+      } catch {
+        dlog("\(msg): \(error)")
+      }
+    }
+
+    if ctx == managedObjectContext {
+      trySave(ctx, msg: "saving the root context failed")
+    } else if ctx?.parentContext == managedObjectContext {
+      ctx?.performBlock {
+        trySave(ctx, msg: "saving the child context failed")
+        ctx?.parentContext?.performBlock {
+          trySave(ctx?.parentContext, msg: "saving the root context failed")
+        }
+      }
+    } else {
+      assert(false, "you're doing something strange with your managed object contexts")
+    }
   }
 
   private func appDocumentsDir() -> NSURL? {
