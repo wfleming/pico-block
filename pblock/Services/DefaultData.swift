@@ -22,38 +22,38 @@ class DefaultData  {
     DefaultRuleSourceDescriptor(
       name: "uBlock filters",
       url: "\(uBlockUrl)/filters.txt",
-      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser"
     ),
     DefaultRuleSourceDescriptor(
       name: "uBlock privacy filters",
       url: "\(uBlockUrl)/privacy.txt",
-      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser"
     ),
     DefaultRuleSourceDescriptor(
       name: "AdBlockPlus EasyList",
       url: "https://easylist-downloads.adblockplus.org/easylist.txt",
-      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser"
     ),
     DefaultRuleSourceDescriptor(
       name: "AdBlockPlus EasyPrivacy",
       url: "https://easylist-downloads.adblockplus.org/easyprivacy.txt",
-      parserType: "ABPRuleFileParser" //ABPRuleFileParser.self
+      parserType: "ABPRuleFileParser"
     ),
     // NOTE: these domains are listed in Info.plist to allow HTTP connections
     DefaultRuleSourceDescriptor(
       name: "Peter Lowe’s Ad server list‎",
       url: "http://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
-      parserType: "HostFileParser" //HostFileParser.self
+      parserType: "HostFileParser"
     ),
     DefaultRuleSourceDescriptor(
       name: "Malware Domain List‎",
       url: "http://www.malwaredomainlist.com/hostslist/hosts.txt",
-      parserType: "HostFileParser" //HostFileParser.self
+      parserType: "HostFileParser"
     ),
     DefaultRuleSourceDescriptor(
       name: "Malware Domains‎",
       url: "http://mirror1.malwaredomains.com/files/justdomains",
-      parserType: "HostFileParser" //HostFileParser.self
+      parserType: "HostFileParser"
     ),
     DefaultRuleSourceDescriptor(
       name: "My Filters",
