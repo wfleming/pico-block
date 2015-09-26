@@ -39,7 +39,8 @@ Log a message to a file shared by the app group.
 func logToGroupLogFile(message: String) {
   #if DEBUG
     let fm = NSFileManager.defaultManager()
-    let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")
+    let appGroup = AppEnv.sharedInstance.appGroup
+    let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier(appGroup)
     if nil == dirURL {
       print("Could not get group directory: cannot log message \"\(message)\"\n")
     } else {

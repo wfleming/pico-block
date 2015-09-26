@@ -20,7 +20,8 @@ func globToRegex(glob: String) -> String {
 // get the path shared by app & extension for the rules JSON
 func rulesJSONPath() -> NSURL {
   let fm = NSFileManager.defaultManager()
-  let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier("group.com.wfleming.pblock")!
+  let appGroup = AppEnv.sharedInstance.appGroup
+  let dirURL = fm.containerURLForSecurityApplicationGroupIdentifier(appGroup)!
   let filePathURL = dirURL.URLByAppendingPathComponent("blockRules.json")
   return filePathURL
 }

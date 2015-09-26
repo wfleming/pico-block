@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE065AED1B93667E00523A5C /* PBEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = BE065AEC1B93667E00523A5C /* PBEnv.m */; settings = {ASSET_TAGS = (); }; };
-		BE065AEF1B93695A00523A5C /* PBEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = BE065AEC1B93667E00523A5C /* PBEnv.m */; settings = {ASSET_TAGS = (); }; };
+		BE065AED1B93667E00523A5C /* PBEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = BE065AEC1B93667E00523A5C /* PBEnv.m */; };
+		BE065AEF1B93695A00523A5C /* PBEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = BE065AEC1B93667E00523A5C /* PBEnv.m */; };
 		BE43E5641B4F25FC00C522FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5631B4F25FC00C522FF /* AppDelegate.swift */; };
 		BE43E5661B4F25FC00C522FF /* RuleSourcesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5651B4F25FC00C522FF /* RuleSourcesController.swift */; };
 		BE43E5681B4F25FC00C522FF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5671B4F25FC00C522FF /* SecondViewController.swift */; };
@@ -18,8 +18,8 @@
 		BE43E5861B4F25FC00C522FF /* pblockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E5851B4F25FC00C522FF /* pblockUITests.swift */; };
 		BE43E59C1B4F262100C522FF /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE43E59B1B4F262100C522FF /* ActionRequestHandler.swift */; };
 		BE43E5A01B4F262100C522FF /* pblock-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE43E5971B4F262100C522FF /* pblock-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BE4E4DF21B9232DF00AEB7E4 /* RulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E4DF11B9232DF00AEB7E4 /* RulesController.swift */; settings = {ASSET_TAGS = (); }; };
-		BE4E4DF41B923BE500AEB7E4 /* DetailViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E4DF31B923BE500AEB7E4 /* DetailViewControllerProtocol.swift */; settings = {ASSET_TAGS = (); }; };
+		BE4E4DF21B9232DF00AEB7E4 /* RulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E4DF11B9232DF00AEB7E4 /* RulesController.swift */; };
+		BE4E4DF41B923BE500AEB7E4 /* DetailViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E4DF31B923BE500AEB7E4 /* DetailViewControllerProtocol.swift */; };
 		BE4FE90F1B88DC2B0075AD95 /* ABPRuleFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE90E1B88DC2B0075AD95 /* ABPRuleFileParser.swift */; };
 		BE4FE9121B8902040075AD95 /* ABPRuleFileParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE9111B8902040075AD95 /* ABPRuleFileParserSpec.swift */; };
 		BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FE9131B890DB30075AD95 /* ParsedRule.swift */; };
@@ -34,10 +34,12 @@
 		BE673C1D1B936D2D0026D8C4 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C181B936D180026D8C4 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE673C1E1B936D2D0026D8C4 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C191B936D180026D8C4 /* Result.framework */; };
 		BE673C1F1B936D2D0026D8C4 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C191B936D180026D8C4 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE673C211B9377D60026D8C4 /* RuleUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C201B9377D60026D8C4 /* RuleUpdater.swift */; settings = {ASSET_TAGS = (); }; };
-		BE673C231B93B3460026D8C4 /* ContentRuleJSONFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */; settings = {ASSET_TAGS = (); }; };
-		BE673C251B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */; settings = {ASSET_TAGS = (); }; };
+		BE673C211B9377D60026D8C4 /* RuleUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C201B9377D60026D8C4 /* RuleUpdater.swift */; };
+		BE673C231B93B3460026D8C4 /* ContentRuleJSONFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */; };
+		BE673C251B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */; };
 		BE673C271B93C73B0026D8C4 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE673C261B93C73B0026D8C4 /* SafariServices.framework */; };
+		BE74FDB01BB7002B008175F8 /* AppEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE74FDAF1BB7002B008175F8 /* AppEnv.swift */; };
+		BE74FDB81BB70A1A008175F8 /* AppEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE74FDAF1BB7002B008175F8 /* AppEnv.swift */; };
 		BE82A2CE1B500F62007A91AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2CD1B500F62007A91AA /* CoreData.framework */; };
 		BE82A2D51B5011DA007A91AA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D31B5011DA007A91AA /* Nimble.framework */; };
 		BE82A2D61B5011DA007A91AA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A2D41B5011DA007A91AA /* Quick.framework */; };
@@ -63,8 +65,8 @@
 		BE83B0CF1B5436B90074FDA3 /* RuleOptionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0CE1B5436B80074FDA3 /* RuleOptionsSpec.swift */; };
 		BE83B0D21B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D01B543B320074FDA3 /* RuleDomain+CoreDataProperties.swift */; };
 		BE83B0D31B543B320074FDA3 /* RuleDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83B0D11B543B320074FDA3 /* RuleDomain.swift */; };
-		BE94FC8B1B92846A006728D5 /* ContentRulesWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE94FC8A1B92846A006728D5 /* ContentRulesWriter.swift */; settings = {ASSET_TAGS = (); }; };
-		BE94FC8D1B928961006728D5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE94FC8C1B928961006728D5 /* Async.swift */; settings = {ASSET_TAGS = (); }; };
+		BE94FC8B1B92846A006728D5 /* ContentRulesWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE94FC8A1B92846A006728D5 /* ContentRulesWriter.swift */; };
+		BE94FC8D1B928961006728D5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE94FC8C1B928961006728D5 /* Async.swift */; };
 		BE9F0A851B8AAEFD00AB1D2F /* SplitViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9F0A841B8AAEFD00AB1D2F /* SplitViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +171,9 @@
 		BE673C221B93B3460026D8C4 /* ContentRuleJSONFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRuleJSONFileParser.swift; sourceTree = "<group>"; };
 		BE673C241B93B3630026D8C4 /* ContentRuleJSONFileParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRuleJSONFileParserSpec.swift; sourceTree = "<group>"; };
 		BE673C261B93C73B0026D8C4 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		BE74FDAF1BB7002B008175F8 /* AppEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEnv.swift; sourceTree = "<group>"; };
+		BE74FDB21BB705E1008175F8 /* Debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Debug.plist; sourceTree = "<group>"; };
+		BE74FDB41BB70675008175F8 /* Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Release.plist; sourceTree = "<group>"; };
 		BE82A2CD1B500F62007A91AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BE82A2D01B500F91007A91AA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		BE82A2D31B5011DA007A91AA /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -243,6 +248,7 @@
 				BE43E5981B4F262100C522FF /* pblock-extension */,
 				BE82A2E81B505297007A91AA /* pblockLib */,
 				BE43E5611B4F25FB00C522FF /* Products */,
+				BE74FDB11BB705C5008175F8 /* env */,
 			);
 			sourceTree = "<group>";
 		};
@@ -328,6 +334,15 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		BE74FDB11BB705C5008175F8 /* env */ = {
+			isa = PBXGroup;
+			children = (
+				BE74FDB21BB705E1008175F8 /* Debug.plist */,
+				BE74FDB41BB70675008175F8 /* Release.plist */,
+			);
+			path = env;
+			sourceTree = "<group>";
+		};
 		BE82A2CF1B500F6D007A91AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +394,7 @@
 				BE82A2E91B5052DA007A91AA /* DebugLog.swift */,
 				BE4FE91B1B891B1C0075AD95 /* Util.swift */,
 				BE94FC8C1B928961006728D5 /* Async.swift */,
+				BE74FDAF1BB7002B008175F8 /* AppEnv.swift */,
 				BE065AEE1B9366DB00523A5C /* PBEnv.h */,
 				BE065AEC1B93667E00523A5C /* PBEnv.m */,
 				BE065AEB1B93667D00523A5C /* pblock-Bridging-Header.h */,
@@ -437,6 +453,7 @@
 				BE82A2DF1B501825007A91AA /* Copy Carthage Frameworks */,
 				BE83B0C91B5202F80074FDA3 /* Embed Frameworks */,
 				BE4FE9101B88FA1B0075AD95 /* Lint Source */,
+				BE74FDB71BB7069A008175F8 /* Copy Env Plist */,
 			);
 			buildRules = (
 			);
@@ -492,6 +509,7 @@
 				BE43E5931B4F262100C522FF /* Sources */,
 				BE43E5941B4F262100C522FF /* Frameworks */,
 				BE43E5951B4F262100C522FF /* Resources */,
+				BE74FDB91BB70B06008175F8 /* Copy Env Plist */,
 			);
 			buildRules = (
 			);
@@ -610,6 +628,34 @@
 			shellPath = /bin/sh;
 			shellScript = "# currently disabled because it throws errors for correct code\n# cd ${PROJECT_DIR}/pblock\n# ${PROJECT_DIR}/vendor/swiftlint/swiftlint";
 		};
+		BE74FDB71BB7069A008175F8 /* Copy Env Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Env Plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/script/copy_env.sh \"${BUILT_PRODUCTS_DIR}/pblock.app\"";
+		};
+		BE74FDB91BB70B06008175F8 /* Copy Env Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Env Plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/script/copy_env.sh \"${BUILT_PRODUCTS_DIR}/pblock-extension.appex\"";
+		};
 		BE82A2DA1B5014AD007A91AA /* Set Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,6 +710,7 @@
 				BE4FE9141B890DB30075AD95 /* ParsedRule.swift in Sources */,
 				BE4E4DF41B923BE500AEB7E4 /* DetailViewControllerProtocol.swift in Sources */,
 				BE82A2FF1B505B5E007A91AA /* RuleSource.swift in Sources */,
+				BE74FDB01BB7002B008175F8 /* AppEnv.swift in Sources */,
 				BE82A3061B5073E7007A91AA /* CoreDataManager.swift in Sources */,
 				BE4E4DF21B9232DF00AEB7E4 /* RulesController.swift in Sources */,
 				BE9F0A851B8AAEFD00AB1D2F /* SplitViewDelegate.swift in Sources */,
@@ -709,6 +756,7 @@
 				BE82A2EB1B5052DA007A91AA /* DebugLog.swift in Sources */,
 				BE065AEF1B93695A00523A5C /* PBEnv.m in Sources */,
 				BE43E59C1B4F262100C522FF /* ActionRequestHandler.swift in Sources */,
+				BE74FDB81BB70A1A008175F8 /* AppEnv.swift in Sources */,
 				BE4FE91E1B891B370075AD95 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

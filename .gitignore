@@ -26,5 +26,5 @@ Carthage/Checkouts/
 
 # App specific
 #
-pblock/environments/*.plist
-
+*/*.entitlements
+env/*.plist
