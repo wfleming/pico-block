@@ -12,7 +12,8 @@ import ReactiveCocoa
 
 // for writing all active rules in the DB into our content blocking json
 class ContentRulesWriter {
-  static let maxRules = 10000 // note this seems to differ by platform: this value is for iOS
+  // TODO: find out the best value for this -- it needs to go up
+  static let maxRules = 20000 // note this seems to differ by platform: this value is for iOS
 
   private let mgr = CoreDataManager.sharedInstance
   private var ctx: NSManagedObjectContext
