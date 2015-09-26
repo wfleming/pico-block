@@ -1,9 +1,7 @@
-pBlock
-======
+# Pico Block
 
-pBlock ("pico block") is a customizable, fully featured ad-blocker for iOS.
+Pico Block ("pblock") is a hackable ad-blocker for iOS. It's an in-progress personal project, so should be considered completely unstable, not even close to complete, and generally probably not worth your time yet.
 
 ## Development
 
-[Carthage](https://github.com/Carthage/Carthage) is used for dependency
-management, so if you haven't used it before, give that page a quick read.
+See the [DEVELOPING.markdown](DEVELOPING.markdown) file in this repository for setup details.
